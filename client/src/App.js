@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Homepage from './components/Homepage';
  import { ApolloProvider } from '@apollo/react-hooks';
  import ApolloClient from 'apollo-boost';
 import Auth from './utils/auth';
@@ -23,10 +23,7 @@ function App() {
      <ApolloProvider client={client}>
     <Router>
       <>
-        <Navbar />
-        <Switch>
-          <Route render={() => <h1 className='display-2'>First page!</h1>} />
-        </Switch>
+        <Homepage />
       </>
     </Router>
      </ApolloProvider>
