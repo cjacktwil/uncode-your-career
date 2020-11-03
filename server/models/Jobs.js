@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 
+const interviewSchema = require('./Interviews');
 const jobSchema = new Schema(
     {
         job_id: {
@@ -24,25 +25,25 @@ const jobSchema = new Schema(
             required: true
         },
         description: String,
-        saved: {
-            type: Boolean,
-            default: false
-    },
-        applied: {
-            type: Boolean,
-            default: false
-        },
-        interview: [interviewSchema],
-        contacts: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'Contact'
-              }
-        ],
-        offer: Boolean,
-        salary: Number,
-        benefits: String,
-        accepted: Boolean
+    //     saved: {
+    //         type: Boolean,
+    //         default: false
+    // },
+    //     applied: {
+    //         type: Boolean,
+    //         default: false
+    //     },
+        // interview: [interviewSchema],
+        // contacts: [
+        //     {
+        //         type: Schema.Types.ObjectId,
+        //         ref: 'Contact'
+        //       }
+        // ],
+        // offer: Boolean,
+        // salary: Number,
+        // benefits: String,
+        // accepted: Boolean
 
 }
 );
