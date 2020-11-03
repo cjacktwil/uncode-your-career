@@ -7,26 +7,31 @@ const jobSchema = new Schema(
           required: true,
           unique: true  
         },
-        title: {
-            type: String,
-            required: true
-        },
-        company: {
-            type: String,
-            required: true
-        },
+        type: String,
         url: {
             type: String,
             required: true
         },
-        location: String,
-        type: String,
-        description: String,
         created_at: Date,
+        company: {
+            type: String,
+            required: true
+        },
+        company_url: String,
+        location: String,
+        title: {
+            type: String,
+            required: true
+        },
+        description: String,
         saved: {
             type: Boolean,
             default: false
     },
+        applied: {
+            type: Boolean,
+            default: false
+        },
         interview: [interviewSchema],
         contacts: [
             {
