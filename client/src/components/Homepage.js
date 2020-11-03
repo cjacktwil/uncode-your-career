@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
+import Userpage from './Userpage';
 import { PageHeader } from 'antd';
 import Auth from '../utils/auth';
 import "antd/dist/antd.css";
@@ -19,7 +20,7 @@ const HomePage = () => {
 
                 className="site-page-header"
                 onBack={() => null}
-                title="Project3"
+                title="Job Search"
                 extra={
                     Auth.loggedIn() ? (
 
@@ -34,7 +35,7 @@ const HomePage = () => {
                 footer={[
                     <Button key="back" onClick={() => setShowModal(false)}>
                         Cancel
-    </Button>
+                    </Button>
                 ]}
                 title=""
                 onCancel={() => setShowModal(false)}
@@ -42,6 +43,7 @@ const HomePage = () => {
             >
                 <LoginForm />
                 <SignUpForm />
+                <Userpage />
             </Modal>
             </div>
             
