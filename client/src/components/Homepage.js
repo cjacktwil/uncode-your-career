@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
-import Userpage from './Userpage';
+// import Userpage from './Userpage';
 import { PageHeader } from 'antd';
 import Auth from '../utils/auth';
 import "antd/dist/antd.css";
@@ -43,7 +43,7 @@ const HomePage = () => {
             >
                 <LoginForm />
                 <SignUpForm />
-                <Userpage />
+                {/* <Userpage /> */}
             </Modal>
             </div>
             
