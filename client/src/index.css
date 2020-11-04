@@ -1,13 +1,12 @@
 body {
     background-image: url("./jobsearch.jpg");
     background-size: cover;
+    max-width: 100%;
+    height: auto;
     background-repeat: no-repeat;
-    
-    
 }
 
 .site-page-header-ghost-wrapper {
     background-color: #f5f5f5;
-    padding: 24px;
-  }
-  
+    padding: 26px;
+}
