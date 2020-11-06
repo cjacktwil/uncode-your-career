@@ -57,7 +57,7 @@ const LoginForm = () => {
 
   return (
 <>
-<div>Login</div>
+Login
     <Form
       {...layout}
       name="basic"
