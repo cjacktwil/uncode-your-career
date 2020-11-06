@@ -11,7 +11,12 @@ body {
     padding: 24px;
   }
 
-  #searchResult{
+  .search-result{
       background-color: aliceblue;
+      min-height: 200px;
+      max-width: 500px;
+  }
+  .search-form{
+      max-width: 500px;
   }
   
