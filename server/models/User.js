@@ -1,6 +1,8 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
+const jobSchema = require('./Jobs');
+
 const userSchema = new Schema(
   {
     username: {
@@ -18,7 +20,14 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    
+    savedJobs: {
+      type: Schema.Types.ObjectId,
+      ref: 'Jobs'
+    },
+    appliedJobs: {
+      type: Schema.Types.ObjectId,
+      ref: 'Jobs'
+    }
   }
   
 );
