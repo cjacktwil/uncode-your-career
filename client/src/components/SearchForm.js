@@ -12,7 +12,7 @@ const SearchForm = () => {
 
 
     const searchJobs = async (description, location, fulltime) => {
-        
+
         let searchBody = "";
         if (description !== "") {
             searchBody = searchBody + "&description=" + description;
@@ -26,9 +26,9 @@ const SearchForm = () => {
         var res = encodeURI(searchBody)
         const response = await fetch(`http://localhost:3001/api?${res}`)
         let respjson = (await response.json());
-        if (respjson.length === 0){
-        window.alert("no results found, please change search or leave one of the fields empty")
-    }
+        if (respjson.length === 0) {
+            window.alert("no results found, please change search or leave one of the fields empty")
+        }
         setArray({ jobs: respjson })
 
     }
@@ -37,7 +37,7 @@ const SearchForm = () => {
     return (
 
         <>
-            <Form 
+            <Form
             >
                 <Form.Item>
                     Description
@@ -61,22 +61,20 @@ const SearchForm = () => {
                 let loc = document.getElementById("Location").value
                 let fullTime = "";
                 let checked = document.getElementById("FullTime").checked
-                if(checked == true){
-                fullTime = "true"
+                if (checked == true) {
+                    fullTime = "true"
                 }
-                else{
-                fullTime = "false"
+                else {
+                    fullTime = "false"
                 }
                 searchJobs(desc, loc, fullTime)
             }}>push</Button>
             {text.jobs.map(item => (
-
-                <Paragraph id="searchResult" key={item.id} ellipsis={{ rows: 2, expandable: true, symbol: 'more' }}>
-                    <li>{item.title} </li>
-                    <li> {item.url} </li>
-                    <li> {item.type}</li>
-
-                </Paragraph>
+                    <Paragraph id="searchResult" key={item.id} ellipsis={{ rows: 2, expandable: true, symbol: 'more' }}>
+                            <li> {item.title} </li>
+                            <li> {item.url} </li>
+                            <li> {item.type}</li>
+                    </Paragraph>
             ))}
         </>
     );
