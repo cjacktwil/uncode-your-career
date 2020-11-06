@@ -59,7 +59,7 @@ const SignupForm = () => {
 
   return (
     <>
-<div>Signup</div>
+Signup
     <Form
       {...layout}
       name="basic"
