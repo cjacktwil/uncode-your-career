@@ -40,16 +40,15 @@ const typeDefs = gql`
   type Query {
     me: User
     allJobs: [Jobs]
-    searchJobs(input: jobInput): [Jobs]
-    savedJobs(input: jobInput): User
+    searchJobs(title: String, location: String, type: String): [Jobs]
     job(job_id: ID!): Jobs
   }
 
   type Mutation {
     login(username: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    saveJob(input: jobInput): User
-    appliedJob(input: jobInput): User
+    saveJob(input: jobInput!): User
+    appliedJob(input: jobInput!): User
     removeJob(job_id: String!): User
   }
 `;

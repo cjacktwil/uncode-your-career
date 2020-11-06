@@ -82,7 +82,7 @@ removeJob: async (parent, { jobId }, context) => {
   if (context.user) {
     const updatedUser = await User.findByIdAndUpdate(
       { _id: context.user._id },
-      { $pull: { savedJobs: { job_id: jobId } } },
+      { $pull: { savedJobs: { job_id: jobId }, appliedJob: { job_id: jobId } } },
       { new: true }
     );
     return updatedUser;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
+import SearchedJobs from './SearchedJobs';
 import { PageHeader } from 'antd';
 import Auth from '../utils/auth';
 
@@ -26,7 +27,7 @@ const HomePage = () => {
                         )}
 
             />
-
+            <SearchedJobs />
             <Modal
                 footer={[
                     <Button key="back" onClick={() => setShowModal(false)}>
