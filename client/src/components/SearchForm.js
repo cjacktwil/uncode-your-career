@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Input, Form, Checkbox, Typography } from "antd";
+import { Button, Input, Form, Checkbox, Typography, Carousel, Image } from "antd";
 import '../index.css';
 const { Paragraph } = Typography;
 
@@ -37,7 +37,7 @@ const SearchForm = () => {
     return (
 
         <>
-            <Form
+            <Form className="search-form"
             >
                 <Form.Item>
                     Description
@@ -69,13 +69,24 @@ const SearchForm = () => {
                 }
                 searchJobs(desc, loc, fullTime)
             }}>push</Button>
-            {text.jobs.map(item => (
-                    <Paragraph id="searchResult" key={item.id} ellipsis={{ rows: 2, expandable: true, symbol: 'more' }}>
-                            <li> {item.title} </li>
-                            <li> {item.url} </li>
-                            <li> {item.type}</li>
-                    </Paragraph>
-            ))}
+            <Carousel className="search-result" autoplay>
+            {text.jobs.slice(0,3).map(item => (
+                    <>
+                            <div>
+                            <Image width={50} src={item.company_logo}
+                            ></Image> <br/>
+                              {item.title} <br/>
+                              {item.url} <br/>
+                              {item.type} <br/>
+                              Company name: {item.company}<br/>
+                              {item.company_url} <br/>
+                              {item.location}<br/>
+                            </div>
+                            
+                            </>
+                            ))}
+                    </Carousel>
+            
         </>
     );
 };
