@@ -52,7 +52,7 @@ const SearchForm = () => {
                 <Form.Item
 
                 >
-                    Fuul time?
+                    Full time?
         <Checkbox id="FullTime" />
                 </Form.Item>
             </Form>
