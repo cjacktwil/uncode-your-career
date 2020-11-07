@@ -31,7 +31,7 @@ mutation saveJob($input: jobInput!) {
     username
     email
     savedJobs {
-      job_id
+      id
       type
       url
       created_at
@@ -39,6 +39,9 @@ mutation saveJob($input: jobInput!) {
       location
       title
       description
+      company_url
+      company_logo
+      how_to_apply
     }
   }
 }
@@ -51,7 +54,7 @@ mutation appliedJob($input: jobInput!) {
     username
     email
     appliedJobs {
-      job_id
+      id
       type
       url
       created_at
@@ -59,19 +62,22 @@ mutation appliedJob($input: jobInput!) {
       location
       title
       description
+      company_url
+      company_logo
+      how_to_apply
     }
   }
 }
 `;
 
 export const REMOVE_JOB = gql`
-mutation removeJob($job_id: String!) {
-  removeJob(job_id: $job_id) {
+mutation removeJob($id: String!) {
+  removeJob(id: $id) {
     _id
     username
     email
     savedJobs {
-      job_id
+      id
       type
       url
       created_at
@@ -79,9 +85,12 @@ mutation removeJob($job_id: String!) {
       location
       title
       description
+      company_url
+      company_logo
+      how_to_apply
     }
     appliedJobs {
-      job_id
+      id
       type
       url
       created_at
@@ -89,6 +98,9 @@ mutation removeJob($job_id: String!) {
       location
       title
       description
+      company_url
+      company_logo
+      how_to_apply
     }
   }
 }

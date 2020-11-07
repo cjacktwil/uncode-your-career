@@ -6,8 +6,32 @@ export const GET_ME = gql`
       _id
       username
       email
-      savedJobs
-      appliedJobs
+      savedJobs {
+        id
+        type
+        url
+        created_at
+        company
+        location
+        title
+        description
+        company_url
+        company_logo
+        how_to_apply
+      }
+      appliedJobs {
+        id
+        type
+        url
+        created_at
+        company
+        location
+        title
+        description
+        company_url
+        company_logo
+        how_to_apply
+      }
     }
   }
 `;
@@ -15,7 +39,7 @@ export const GET_ME = gql`
 export const GET_ALL_JOBS = gql`
 {
   allJobs {
-    job_id
+    id
     type
     url
     created_at
@@ -23,6 +47,9 @@ export const GET_ALL_JOBS = gql`
     location
     title
     description
+    company_url
+    company_logo
+    how_to_apply
   }
 }
 `;
@@ -30,7 +57,7 @@ export const GET_ALL_JOBS = gql`
 export const GET_SEARCH_JOBS = gql`
 query searchJobs($title: String, $location: String, $type: String ) {
   searchJobs(title: $title, location: $location, type: $type) {
-    job_id
+    id
     type
     url
     created_at
@@ -38,14 +65,17 @@ query searchJobs($title: String, $location: String, $type: String ) {
     location
     title
     description
+    company_url
+    company_logo
+    how_to_apply
   }
 }
 `;
 
 export const GET_JOB = gql`
-query job($job_id: String!) {
-  job(job_id: $job_id) {
-    job_id
+query job($id: String!) {
+  job(id: $id) {
+    id
     type
     url
     created_at
@@ -53,6 +83,9 @@ query job($job_id: String!) {
     location
     title
     description
+    company_url
+    company_logo
+    how_to_apply
   }
 }
 `;

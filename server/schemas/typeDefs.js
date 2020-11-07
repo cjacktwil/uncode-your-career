@@ -10,7 +10,7 @@ const typeDefs = gql`
   }
 
   type Jobs {
-    job_id: ID!
+    id: String!
     type: String!
     url: String!
     created_at: String
@@ -18,10 +18,13 @@ const typeDefs = gql`
     location: String
     title: String!
     description: String
+    company_url: String
+    company_logo: String
+    how_to_apply: String
   }
 
   input jobInput {
-    job_id: String!
+    id: String!
     type: String!
     url: String!
     created_at: String
@@ -29,6 +32,9 @@ const typeDefs = gql`
     location: String
     title: String!
     description: String
+    company_url: String
+    company_logo: String
+    how_to_apply: String
   }
   
 
@@ -41,7 +47,7 @@ const typeDefs = gql`
     me: User
     allJobs: [Jobs]
     searchJobs(title: String, location: String, type: String): [Jobs]
-    job(job_id: ID!): Jobs
+    job(id: String!): Jobs
   }
 
   type Mutation {
@@ -49,7 +55,7 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     saveJob(input: jobInput!): User
     appliedJob(input: jobInput!): User
-    removeJob(job_id: String!): User
+    removeJob(id: String!): User
   }
 `;
 
