@@ -4,8 +4,10 @@ import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 import { PageHeader } from 'antd';
 import Auth from '../utils/auth';
+import SearchForm from './SearchForm'
 import "antd/dist/antd.css";
 import '../index.css';
+
 
 
 const HomePage = () => {
@@ -44,6 +46,7 @@ const HomePage = () => {
                 <SignUpForm />
             </Modal>
             </div>
+            <SearchForm/>
             
         </>
     );
