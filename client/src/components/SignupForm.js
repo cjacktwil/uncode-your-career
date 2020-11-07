@@ -12,12 +12,8 @@ const SignupForm = () => {
   // set state for form validation
 
   const handleInputChange = (event) => {
-    console.log(event)
     const { name, value } = event.target;
-    console.log(name, value);
     setUserFormData({ ...userFormData, [name]: value });
-    let q = { ...userFormData }
-    console.log(q)
   };
 
   const handleFormSubmit = async () => {
@@ -62,7 +58,8 @@ const SignupForm = () => {
   };
 
   return (
-
+    <>
+Signup
     <Form
       {...layout}
       name="basic"
@@ -125,7 +122,7 @@ const SignupForm = () => {
         </Button>
       </Form.Item>
     </Form>
-
+</>
   );
 };
 

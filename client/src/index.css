@@ -1,4 +1,22 @@
-#signWord{
-    margin-left: 50%;
-    font-size: 20pt;
+body {
+    background-image: url("./jobsearch.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    
 }
+
+.site-page-header-ghost-wrapper {
+    background-color: #f5f5f5;
+    padding: 24px;
+  }
+
+  .search-result{
+      background-color: aliceblue;
+      min-height: 200px;
+      max-width: 500px;
+  }
+  .search-form{
+      max-width: 500px;
+  }
+  

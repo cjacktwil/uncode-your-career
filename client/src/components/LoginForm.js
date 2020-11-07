@@ -13,12 +13,8 @@ const LoginForm = () => {
   
 
   const handleInputChange = (event) => {
-    console.log(event)
     const { name, value } = event.target;
-    console.log(name, value);
     setUserFormData({ ...userFormData, [name]: value });
-    let q = { ...userFormData }
-    console.log(q)
   };
 
   const handleFormSubmit = async (event) => {
@@ -61,7 +57,8 @@ const LoginForm = () => {
   };
 
   return (
-
+<>
+Login
     <Form
       {...layout}
       name="basic"
@@ -109,7 +106,7 @@ const LoginForm = () => {
         </Button>
       </Form.Item>
     </Form>
-
+</>
 
   );
 };

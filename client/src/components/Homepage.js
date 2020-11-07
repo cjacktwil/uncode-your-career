@@ -5,6 +5,10 @@ import LoginForm from './LoginForm';
 import SearchedJobs from './SearchedJobs';
 import { PageHeader } from 'antd';
 import Auth from '../utils/auth';
+import SearchForm from './SearchForm'
+import "antd/dist/antd.css";
+import '../index.css';
+
 
 
 const HomePage = () => {
@@ -13,6 +17,7 @@ const HomePage = () => {
 
     return (
         <>
+        <div className="site-page-header-ghost-wrapper">
             <PageHeader
 
                 className="site-page-header"
@@ -34,12 +39,16 @@ const HomePage = () => {
                         Cancel
     </Button>
                 ]}
-                title="Basic Modal"
+                title=""
+                onCancel={() => setShowModal(false)}
                 visible={showModal}
             >
                 <LoginForm />
                 <SignUpForm />
             </Modal>
+            </div>
+            <SearchForm/>
+            
         </>
     );
 
