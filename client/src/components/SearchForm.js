@@ -52,7 +52,7 @@ const SearchForm = () => {
                 <Form.Item
 
                 >
-                    Fuul time?
+                    Full time?
         <Checkbox id="FullTime" />
                 </Form.Item>
             </Form>
@@ -61,7 +61,7 @@ const SearchForm = () => {
                 let loc = document.getElementById("Location").value
                 let fullTime = "";
                 let checked = document.getElementById("FullTime").checked
-                if (checked == true) {
+                if (checked === true) {
                     fullTime = "true"
                 }
                 else {
