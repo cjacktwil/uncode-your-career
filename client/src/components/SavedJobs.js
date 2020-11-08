@@ -24,7 +24,7 @@ const SavedJobs = () => {
 
     const handleApplyJob = async (jobId) => {
         const jobToApply = userData.savedJobs.find((job) => job.id === jobId);
-        console.log(jobToApply);
+        //console.log(jobToApply);
 
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -47,14 +47,16 @@ const SavedJobs = () => {
     };
 
     return (
+        
         <>
-        {Auth.loggedIn() && userData.savedJobs.length ?
+        
+        {Auth.loggedIn() && userData && userData.savedJobs && userData.savedJobs.length ?
         <div className = "site-card-wrapper">
-            <Row gutter={16}>
+            {/* <Row gutter={16}> */}
             {userData.savedJobs.map(job => (
                 <>
             
-                <Col span={8}> 
+                {/* <Col span={8}>  */}
                 <Card>
                 <div key={job.id}>
                                 <Image width={50} src={job.company_logo}
@@ -63,19 +65,19 @@ const SavedJobs = () => {
                                 {job.type} <br />
                               Company name: <Link href="{job.company_url}" taret="_blank">{job.company}</Link><br />
                                 {job.location}<br />
-                                <Button onClick={() => handleApplyJob(job.id)}>I've applied for this job.</Button>
+                                <Button onClick={() => handleApplyJob(job.id)}>Already applied</Button>
                             </div>
                             </Card>
-                            </Col>
+                            {/* </Col> */}
                          
                             </>
                            
                     
             ))}
 
-</Row>
+{/* </Row> */}
                             </div>
-        : "Start saving jobs!"}
+        : <span className="saved-title"> You don't have any saved jobes. Please Log in to save.</span> }
         </>
     );
 };
