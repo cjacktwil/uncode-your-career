@@ -27,14 +27,11 @@ const jobSchema = new Schema(
         },
         how_to_apply: String,
         description: String,
-    //     saved: {
-    //         type: Boolean,
-    //         default: false
-    // },
-    //     applied: {
-    //         type: Boolean,
-    //         default: false
-    //     },
+        applied: {
+            type: Boolean,
+            default: false
+        },
+        notes: String
         // interview: [interviewSchema],
         // contacts: [
         //     {

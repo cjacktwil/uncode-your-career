@@ -66,18 +66,18 @@ const resolvers = {
       throw new AuthenticationError('You must log in to save a job.');
     },
 
-appliedJob: async (parent, { input }, context) => {
-  if (context.user) {
+// appliedJob: async (parent, { input }, context) => {
+//   if (context.user) {
 
-    const updatedUser = await User.findByIdAndUpdate(
-      { _id: context.user._id},
-      { $addToSet: { appliedJob: input } },
-      { new: true }
-    ).populate('appliedJob');
-    return updatedUser;
-  }
-  throw new AuthenticationError('You must be logged in to manage your jobs.');
-},
+//     const updatedUser = await User.findByIdAndUpdate(
+//       { _id: context.user._id},
+//       { $addToSet: { appliedJob: input } },
+//       { new: true }
+//     ).populate('appliedJob');
+//     return updatedUser;
+//   }
+//   throw new AuthenticationError('You must be logged in to manage your jobs.');
+// },
 
 removeJob: async (parent, { jobId }, context) => {
   if (context.user) {
