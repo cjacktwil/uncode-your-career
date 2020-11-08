@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Homepage from './components/Homepage';
-import Description from './components/Description';
  import { ApolloProvider } from '@apollo/react-hooks';
  import ApolloClient from 'apollo-boost';
 import Auth from './utils/auth';
@@ -26,7 +25,6 @@ function App() {
       <>
       <Switch>
           <Route exact path='/' component={Homepage} />
-          <Route exact path='/description' component={Description} />
           <Route render={() => <h1 >Wrong page!</h1>} />
         </Switch>
       </>

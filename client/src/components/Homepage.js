@@ -47,7 +47,7 @@ const HomePage = () => {
                 </Modal>
             </div>
             <SearchForm />
-
+            
         </>
     );
 

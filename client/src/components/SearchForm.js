@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Button, Input, Form, Checkbox, Carousel, Image } from "antd";
+import ReactHtmlParser from 'react-html-parser';
 import '../index.css';
-
 
 
 
 const SearchForm = () => {
 
+
+
     const [text, setArray] = useState({ jobs: [] });
+
+    const [descriptionmode, showDescription] = useState(false)
 
 
     const searchJobs = async (description, location, fulltime) => {
@@ -31,6 +35,7 @@ const SearchForm = () => {
         setArray({ jobs: respjson })
 
     }
+
 
 
     return (
@@ -60,7 +65,7 @@ const SearchForm = () => {
                 let loc = document.getElementById("Location").value
                 let fullTime = "";
                 let checked = document.getElementById("FullTime").checked
-                if (checked == true) {
+                if (checked === true) {
                     fullTime = "true"
                 }
                 else {
@@ -68,27 +73,34 @@ const SearchForm = () => {
                 }
                 searchJobs(desc, loc, fullTime)
             }}>push</Button>
-            <Carousel className="search-result" autoplay>
-            {text.jobs.slice(0,3).map(item => (
+            <Carousel accordion className="search-result" autoplay>
+                {text.jobs.slice(0, 10).map(item => (
                     <>
-                            <div>
+
+                        <div>
                             <Image width={50} src={item.company_logo}
-                            ></Image> <br/>
-                              {item.title} <br/>
-                              {item.url} <br/>
-                              {item.type} <br/>
-                              Company name: {item.company}<br/>
-                              {item.company_url} <br/>
-                              {item.location}<br/>
-                              <Button>
-                                  Reed full description
-                              </Button>
+                            ></Image> <br />
+                            {item.title} <br />
+                            {item.url} <br />
+                            {item.type} <br />
+                              Company name: {item.company}<br />
+                            {item.company_url} <br />
+                            {item.location}<br />
+
+                        </div>
+                        {descriptionmode ? (
+                            <div>
+                                <Button onClick={() => showDescription(false)}>Hide Description</Button>
+                                { ReactHtmlParser(item.description)}
                             </div>
-                            
-                            </>
-                            ))}
-                    </Carousel>
-            
+                        ) :
+                            <div>
+                                <Button onClick={() => showDescription(true)}>Full Description</Button>
+                            </div>
+                        }
+                    </>
+                ))}
+            </Carousel>
         </>
     );
 };
