@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Input, Form, Checkbox, Typography, Carousel, Image } from "antd";
+import { Button, Input, Form, Checkbox, Carousel, Image } from "antd";
 import '../index.css';
-const { Paragraph } = Typography;
 
 
 
@@ -81,6 +80,9 @@ const SearchForm = () => {
                               Company name: {item.company}<br/>
                               {item.company_url} <br/>
                               {item.location}<br/>
+                              <Button>
+                                  Reed full description
+                              </Button>
                             </div>
                             
                             </>

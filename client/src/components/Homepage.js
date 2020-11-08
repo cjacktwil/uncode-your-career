@@ -16,38 +16,38 @@ const HomePage = () => {
 
     return (
         <>
-        <div className="site-page-header-ghost-wrapper">
-            <PageHeader
+            <div className="site-page-header-ghost-wrapper">
+                <PageHeader
 
-                className="site-page-header"
-                onBack={() => null}
-                title="Project3"
-                extra={
-                    Auth.loggedIn() ? (
+                    className="site-page-header"
+                    onBack={() => null}
+                    title="Project3"
+                    extra={
+                        Auth.loggedIn() ? (
 
-                        <Button type="primary" onClick={Auth.logout}>Logout</Button>
-                    ) : (
-                            <Button type="primary" onClick={() => setShowModal(true)}>Login/Signup</Button>
-                        )}
+                            <Button type="primary" onClick={Auth.logout}>Logout</Button>
+                        ) : (
+                                <Button type="primary" onClick={() => setShowModal(true)}>Login/Signup</Button>
+                            )}
 
-            />
+                />
 
-            <Modal
-                footer={[
-                    <Button key="back" onClick={() => setShowModal(false)}>
-                        Cancel
-    </Button>
-                ]}
-                title=""
-                onCancel={() => setShowModal(false)}
-                visible={showModal}
-            >
-                <LoginForm />
-                <SignUpForm />
-            </Modal>
+                <Modal
+                    footer={[
+                        <Button key="back" onClick={() => setShowModal(false)}>
+                            Cancel
+                        </Button>
+                    ]}
+                    title=""
+                    onCancel={() => setShowModal(false)}
+                    visible={showModal}
+                >
+                    <LoginForm />
+                    <SignUpForm />
+                </Modal>
             </div>
-            <SearchForm/>
-            
+            <SearchForm />
+
         </>
     );
 
