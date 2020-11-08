@@ -20,17 +20,9 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    savedJobs: {
-      type: Schema.Types.ObjectId,
-      ref: 'Jobs'
-    },
-    appliedJobs: {
-      type: Schema.Types.ObjectId,
-      ref: 'Jobs'
-    }
-  }
-  
-);
+    savedJobs: [jobSchema],
+    appliedJobs: [jobSchema]
+  });
 
 // hash user password
 userSchema.pre('save', async function (next) {
