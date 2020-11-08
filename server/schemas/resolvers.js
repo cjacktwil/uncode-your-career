@@ -1,31 +1,32 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User } = require('../models');
+const jobSchema = require('../models/Jobs');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await (await User.findOne({ _id: context.user._id }).select('-__v -password')).populated('savedJobs');
+        const userData = await (await User.findOne({ _id: context.user._id }).select('-__v -password')).populate('savedJobs');
 
         return userData;
       }
 
       throw new AuthenticationError('Not logged in');
     },
-    allJobs: async () => {
-      return Jobs.find().sort({ created_at: -1 })
-    },
-    searchJobs: async (parent, { title, location, type }) => {
-      const params = title ? { title } : {} && location ? { location } : {} && type ? { type } : {};
-      return Jobs.find(params).sort({ created_at: -1 });
-    },
+    // allJobs: async () => {
+    //   return Jobs.find().sort({ created_at: -1 })
+    // },
+    // searchJobs: async (parent, { title, location, type }) => {
+    //   const params = title ? { title } : {} && location ? { location } : {} && type ? { type } : {};
+    //   return Jobs.find(params).sort({ created_at: -1 });
+    // },
     // savedJobs: async (parent, { saved }) => {
     //   return Jobs.find(saved).sort({created_at: -1});
     // },
-    job: async (parent, { job_id }) => {
-      return Jobs.findOne(job_id)
-    }
+    // job: async (parent, { id }) => {
+    //   return Jobs.findOne(id)
+    // }
   },
 
   Mutation: {
@@ -82,7 +83,7 @@ removeJob: async (parent, { jobId }, context) => {
   if (context.user) {
     const updatedUser = await User.findByIdAndUpdate(
       { _id: context.user._id },
-      { $pull: { savedJobs: { job_id: jobId } } },
+      { $pull: { savedJobs: { id: jobId }, appliedJob: { id: jobId } } },
       { new: true }
     );
     return updatedUser;

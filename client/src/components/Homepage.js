@@ -8,12 +8,14 @@ import Auth from '../utils/auth';
 import SearchForm from './SearchForm'
 import "antd/dist/antd.css";
 import '../index.css';
+import SavedJobs from './SavedJobs';
 
 
 
 const HomePage = () => {
 
     const [showModal, setShowModal] = useState(false);
+    // const [showSavedJobs, setShowSavedJobs] = useState(false);
 
     return (
         <>
@@ -25,14 +27,16 @@ const HomePage = () => {
                 title="Job Search"
                 extra={
                     Auth.loggedIn() ? (
-
+<>
                         <Button type="primary" onClick={Auth.logout}>Logout</Button>
+                        {/* <Button type="primary" onClick={() => setShowSavedJobs(true)}>Saved Jobs</Button> */}
+  </>
                     ) : (
                             <Button type="primary" onClick={() => setShowModal(true)}>Login/Signup</Button>
                         )}
 
             />
-
+            {/* <SearchedJobs /> */}
             <Modal
                 footer={[
                     <Button key="back" onClick={() => setShowModal(false)}>
@@ -48,7 +52,8 @@ const HomePage = () => {
                 {/* <Userpage /> */}
             </Modal>
             </div>
-            <SearchForm/>
+            <SearchForm />
+            <SavedJobs />
             
         </>
     );

@@ -1,12 +1,12 @@
-const { Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
 
 const interviewSchema = require('./Interviews');
 const jobSchema = new Schema(
     {
-        job_id: {
+        id: {
           type: String,
           required: true,
-          unique: true  
+
         },
         type: String,
         url: {
@@ -19,11 +19,13 @@ const jobSchema = new Schema(
             required: true
         },
         company_url: String,
+        company_logo: String,
         location: String,
         title: {
             type: String,
             required: true
         },
+        how_to_apply: String,
         description: String,
     //     saved: {
     //         type: Boolean,
@@ -48,6 +50,8 @@ const jobSchema = new Schema(
 }
 );
 
-const Job = model('Job', jobSchema);
+// const Job = model('Job', jobSchema);
 
-module.exports = Job;
+module.exports = jobSchema;
+
+        //   unique: true  
