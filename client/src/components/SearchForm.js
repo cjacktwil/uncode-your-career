@@ -1,3 +1,5 @@
+
+import ReactHtmlParser from 'react-html-parser';
 import React, { useState, useEffect } from 'react';
 import { Button, Input, Form, Checkbox, Typography, Carousel, Image } from "antd";
 import '../index.css';
@@ -6,10 +8,12 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 import { GET_ME } from '../utils/queries';
 import { SAVE_JOB } from '../utils/mutations';
 // import { getSavedJobIds, saveJobIds } from '../utils/localStorage';
-const { Paragraph, Link } = Typography;
-
-
+const { Link } = Typography;
 const SearchForm = () => {
+
+    //const [text, setArray] = useState({ jobs: [] });
+
+    const [descriptionmode, showDescription] = useState(false)
 
     // const [searchedJobs, setSearchedJobs] = useState({ jobs: [] });
     const [searchedJobs, setSearchedJobs] = useState([]);
@@ -80,6 +84,7 @@ const SearchForm = () => {
     };
 
 
+
     return (
 
         <>
@@ -115,6 +120,7 @@ const SearchForm = () => {
                 }
                 searchJobs(desc, loc, fullTime)
             }}>Search</Button>
+
             {searchedJobs.length ?
                 <Carousel className="search-result" autoplay>
                     {/* {searchedJobs.jobs.slice(0,3).map(job => ( */}
@@ -129,7 +135,16 @@ const SearchForm = () => {
                                 {job.location}<br />
                                 <Button onClick={() => handleSaveJob(job.id)}>Save Job</Button>
                             </div>
-
+                            {descriptionmode ? (
+                            <div>
+                                <Button onClick={() => showDescription(false)}>Hide Description</Button>
+                                { ReactHtmlParser(job.description)}
+                            </div>
+                        ) :
+                            <div>
+                                <Button onClick={() => showDescription(true)}>Full Description</Button>
+                            </div>
+                        }
                         </>
                     ))}
                 </Carousel>
