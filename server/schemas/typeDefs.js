@@ -7,6 +7,7 @@ const typeDefs = gql`
     email: String
     savedJobs: [Jobs]
     appliedJobs: [Jobs]
+
   }
 
   type Jobs {
@@ -45,9 +46,7 @@ const typeDefs = gql`
 
   type Query {
     me: User
-    allJobs: [Jobs]
-    searchJobs(title: String, location: String, type: String): [Jobs]
-    job(id: String!): Jobs
+    
   }
 
   type Mutation {
@@ -60,3 +59,13 @@ const typeDefs = gql`
 `;
 
 module.exports = typeDefs;
+
+
+
+
+
+    // allJobs: [Jobs]
+    // searchJobs(title: String, location: String, type: String): [Jobs]
+    // job(id: String!): Jobs
+
+

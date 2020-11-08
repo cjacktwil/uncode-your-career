@@ -6,7 +6,7 @@ const jobSchema = new Schema(
         id: {
           type: String,
           required: true,
-          unique: true  
+
         },
         type: String,
         url: {
@@ -53,3 +53,5 @@ const jobSchema = new Schema(
 // const Job = model('Job', jobSchema);
 
 module.exports = jobSchema;
+
+        //   unique: true  
