@@ -21,7 +21,8 @@
     "antd": "^4.7.3",
     "apollo-boost": "^0.4.9",
     "apollo-server-express": "^2.18.2",
-    "if-env": "^1.0.4"
+    "if-env": "^1.0.4",
+    "react-html-parser": "^2.0.2"
   },
   "devDependencies": {
     "concurrently": "^5.2.0"
