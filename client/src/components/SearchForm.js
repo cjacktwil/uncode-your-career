@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Input, Form, Checkbox, Typography, Carousel, Image } from "antd";
+import { Button, Input, Form, Checkbox, Typography, Carousel, Image, Layout } from "antd";
 import '../index.css';
+
 const { Paragraph } = Typography;
-
-
-
+const { Header, Footer, Sider, Content } = Layout;
 
 const SearchForm = () => {
 
@@ -33,9 +32,7 @@ const SearchForm = () => {
 
     }
 
-
-    return (
-
+    return (  
         <>
             <Form className="search-form"
             >
@@ -55,7 +52,10 @@ const SearchForm = () => {
                     Full time?
         <Checkbox id="FullTime" />
                 </Form.Item>
+                
             </Form>
+            
+            
             <Button onClick={() => {
                 let desc = document.getElementById("Description").value
                 let loc = document.getElementById("Location").value
@@ -85,10 +85,14 @@ const SearchForm = () => {
                             
                             </>
                             ))}
+                            
                     </Carousel>
-            
+                    
+                    
         </>
+
     );
+    
 };
 
 export default SearchForm;
