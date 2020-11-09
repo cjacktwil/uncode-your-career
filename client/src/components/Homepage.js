@@ -11,9 +11,10 @@ import "antd/dist/antd.css";
 import '../index.css';
 import SavedJobs from './SavedJobs';
 
-const { Header, Footer, Sider, Content } = Layout;
 
-const HomePage = () => {
+const { Footer, Sider, Content } = Layout;
+
+const HomePage = (props) => {
 
     const [showModal, setShowModal] = useState(false);
     // const [showSavedJobs, setShowSavedJobs] = useState(false);
@@ -70,11 +71,14 @@ const HomePage = () => {
                     </Modal>
 
 <div id="searchContainer">
-                    <SearchForm />
+                    <SearchForm {...props} />
                     </div>
 
 
                 </Content>
+                <Footer>
+                    I am footer
+                </Footer>
             </Layout>
         </Layout>
         </Layout>
