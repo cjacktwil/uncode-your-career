@@ -18,10 +18,12 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
+    "@stripe/stripe-js": "^1.11.0",
     "antd": "^4.7.3",
     "apollo-boost": "^0.4.9",
     "apollo-server-express": "^2.18.2",
-    "if-env": "^1.0.4"
+    "if-env": "^1.0.4",
+    "stripe": "^8.120.0"
   },
   "devDependencies": {
     "concurrently": "^5.2.0"
