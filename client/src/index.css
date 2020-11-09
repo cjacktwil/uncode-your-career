@@ -1,10 +1,10 @@
-/* body {
+ /* body {
     background-image: url("./jobsearch.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     
     
-} */
+}  */
 
 .site-page-header-ghost-wrapper {
     background-color: #f5f5f5;
@@ -12,19 +12,36 @@
   }
 
   .search-result{
-      background-color: aliceblue;
+      background-color: rgb(173, 226, 230);
       min-height: 200px;
       max-width: 100%;
+      opacity: 0.9;
   }
   .search-form{
       max-width: 500px;
+      
+      
   }
+
 
   .saved-title{
       color: aliceblue;
   }
 
   #searchContainer{
-      margin: 20px;
+      margin: 0 5px;
+      height: 550px;
+      border-radius: 5px;
+      background-image: url("./jobsearch.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .shortDesc{
+      max-height: 110px;
+  }
+
+  #searchButton{
+      margin-left: 50px;
   }
   
