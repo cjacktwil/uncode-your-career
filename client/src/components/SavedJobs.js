@@ -47,10 +47,11 @@ const SavedJobs = () => {
 
     return (
         
-        <>
+        // <>
         
         {Auth.loggedIn() && userData && userData.savedJobs && userData.savedJobs.length ?
-        <div className = "site-card-wrapper">
+        <>
+            <div className = "site-card-wrapper">
             {/* <Row gutter={16}> */}
             {userData.savedJobs.map(job => (
                 <>
@@ -80,7 +81,8 @@ const SavedJobs = () => {
                                 ):
                                 <Button onClick={() => clickHandler()}>I've applied for this job.</Button>
                             //add clickhandler to change applied from false to true
-                                {/* </div> */}
+                                </div>
+                                </>
                                 };
                             </Card>
                             {/* </Col> */}
