@@ -5,8 +5,9 @@ import {PageHeader} from 'antd'
 import ReactHtmlParser from 'react-html-parser';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
+import SavedJobs from './SavedJobs';
 
-const {Content} = Layout
+const { Content, Footer, Sider } = Layout
 
 
 const Details = (props) => {
@@ -34,6 +35,12 @@ extra={
     
     
     <Layout>
+            <Sider >
+                <div className="saved-title">
+                    Saved Jobs
+                    </div>
+                <SavedJobs />
+            </Sider>
     <Content style={{ margin: '24px 16px 0' }}>
         <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
         <>
