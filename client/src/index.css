@@ -8,7 +8,7 @@
 
 .site-page-header-ghost-wrapper {
     background-color: #f5f5f5;
-    padding: 24px;
+    padding: 18px;
   }
 
   .search-result{
@@ -17,12 +17,10 @@
       max-width: 100%;
       opacity: 0.9;
   }
+
   .search-form{
       max-width: 500px;
-      
-      
   }
-
 
   .saved-title{
       color: aliceblue;
@@ -45,3 +43,16 @@
       margin-left: 50px;
   }
   
+  .footer {
+    text-align: center;
+    text-decoration: none;
+    font-size: 160%;
+  }
+
+  #start {
+    text-align: left;
+    font-style: italic;
+    font-size: 14px;
+    color: white;
+    padding: 10px;
+  }

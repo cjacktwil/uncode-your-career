@@ -97,21 +97,17 @@ const SearchForm = (props) => {
         <>
             <Form className="search-form"
             >
-                <Form.Item>
+                <Form.Item style={{ color: 'white', fontSize: "12px", padding: '10px 0px 0px 12px' }}>
                     Description
     <Input id="Description" />
                 </Form.Item>
-                <Form.Item
-
-                >
+                <Form.Item style={{ color: 'white', fontSize: "12px", padding: '10px 0px 0px 12px' }}>
                     Location
     <Input id="Location" />
                 </Form.Item>
-                <Form.Item
-
-                >
-                    Full time?
-        <Checkbox id="FullTime" />
+                <Form.Item style={{ color: 'white', fontSize: "12px", padding: '10px 0px 0px 12px' }}>
+                    Full Time
+        <Checkbox id="FullTime" style={{ padding: '10px'}}/>
                 
             <Button id="searchButton" onClick={() => {
                 let desc = document.getElementById("Description").value
@@ -163,12 +159,11 @@ const SearchForm = (props) => {
 
                             }
                             
-                                
                            
                         </>
                     ))}
                 </Carousel>
-                : `Start your job search now!`}
+                : <div id="start"> Start your job search now! </div> }
 
         </>
     );

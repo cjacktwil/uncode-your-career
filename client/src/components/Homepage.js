@@ -13,6 +13,7 @@ import SavedJobs from './SavedJobs';
 
 
 const { Footer, Sider, Content } = Layout;
+// const { Title } = Typography;
 
 const HomePage = (props) => {
 
@@ -21,10 +22,11 @@ const HomePage = (props) => {
 
     return (
         <Layout>
+            {/* <Title level={2} style={{ textAlign: 'left'}}> Job Search </Title> */}
         <>
                         <div className="site-page-header-ghost-wrapper">
                             <PageHeader
-
+                                
                                 className="site-page-header"
                                 onBack={() => null}
                                 title="Job Search"
@@ -76,9 +78,7 @@ const HomePage = (props) => {
 
 
                 </Content>
-                <Footer>
-                    I am footer
-                </Footer>
+                <Footer style={{ textAlign: 'center', fontSize: '24px' }}> <h6>&copy; 2020</h6> </Footer>
             </Layout>
         </Layout>
         </Layout>
