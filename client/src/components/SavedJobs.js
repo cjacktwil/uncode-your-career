@@ -77,7 +77,7 @@ const SavedJobs = () => {
 
 {/* </Row> */}
                             </div>
-        : <span className="saved-title"> You don't have any saved jobes. Please Log in to save.</span> }
+        : <span className="saved-title-description"> You don't have any saved jobs. Please log in to save.</span> }
         </>
     );
 };
