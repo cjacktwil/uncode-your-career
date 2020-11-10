@@ -2,6 +2,8 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User } = require('../models');
 const jobSchema = require('../models/Jobs');
 const { signToken } = require('../utils/auth');
+const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+
 
 const resolvers = {
   Query: {
@@ -91,6 +93,10 @@ removeJob: async (parent, { jobId }, context) => {
   throw new AuthenticationError('You must be logged into manage your jobs.');
 }
   },
+
+  checkout: async (parent, args, context) => {
+    const donation = new Donation({ donation: args.donation });
+  }
 
 };
 

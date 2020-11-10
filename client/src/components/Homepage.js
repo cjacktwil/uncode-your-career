@@ -10,10 +10,10 @@ import SearchForm from './SearchForm'
 import "antd/dist/antd.css";
 import '../index.css';
 import SavedJobs from './SavedJobs';
-
+import DonationForm from '../components/DonationForm';
 
 const { Footer, Sider, Content } = Layout;
-// const { Title } = Typography;
+
 
 const HomePage = (props) => {
 
@@ -22,11 +22,10 @@ const HomePage = (props) => {
 
     return (
         <Layout>
-            {/* <Title level={2} style={{ textAlign: 'left'}}> Job Search </Title> */}
         <>
                         <div className="site-page-header-ghost-wrapper">
                             <PageHeader
-                                
+
                                 className="site-page-header"
                                 onBack={() => null}
                                 title="Job Search"
@@ -40,8 +39,12 @@ const HomePage = (props) => {
                                             <Button type="primary" onClick={() => setShowModal(true)}>Login/Signup</Button>
                                         )}
 
+     
+
                             />
-                            {/* <SearchedJobs /> */}
+
+                         
+
                         </div>
                     </>
                     
@@ -69,6 +72,7 @@ const HomePage = (props) => {
                     >
                         <LoginForm />
                         <SignUpForm />
+                        <DonationForm />
                         {/* <Userpage /> */}
                     </Modal>
 
@@ -78,7 +82,9 @@ const HomePage = (props) => {
 
 
                 </Content>
+
                 <Footer style={{ textAlign: 'center', fontSize: '24px' }}> <h6>&copy; 2020</h6> </Footer>
+
             </Layout>
         </Layout>
         </Layout>
