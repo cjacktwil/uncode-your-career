@@ -21,67 +21,78 @@ const HomePage = (props) => {
     // const [showSavedJobs, setShowSavedJobs] = useState(false);
 
     return (
-        <Layout>
-            {/* <Title level={2} style={{ textAlign: 'left'}}> Job Search </Title> */}
-        <>
-                        <div className="site-page-header-ghost-wrapper">
-                            <PageHeader
-                                
-                                className="site-page-header"
-                                onBack={() => null}
-                                title="Job Search"
-                                extra={
-                                    Auth.loggedIn() ? (
-                                        <>
-                                            <Button type="primary" onClick={Auth.logout}>Logout</Button>
-                                            {/* <Button type="primary" onClick={() => setShowSavedJobs(true)}>Saved Jobs</Button> */}
-                                        </>
-                                    ) : (
-                                            <Button type="primary" onClick={() => setShowModal(true)}>Login/Signup</Button>
-                                        )}
+        
 
-                            />
-                            {/* <SearchedJobs /> */}
-                        </div>
-                    </>
-                    
-        <Layout>
-            <Sider >
-                <div className="saved-title">
-                    Saved Jobs
-                    </div>
-                <SavedJobs />
-            </Sider>
             <Layout>
-                
-                    
-                
-                <Content>
-                    <Modal
-                        footer={[
-                            <Button key="back" onClick={() => setShowModal(false)}>
-                                Cancel
-                    </Button>
-                        ]}
-                        title=""
-                        onCancel={() => setShowModal(false)}
-                        visible={showModal}
-                    >
-                        <LoginForm />
-                        <SignUpForm />
-                        {/* <Userpage /> */}
-                    </Modal>
+                {/* <Title level={2} style={{ textAlign: 'left'}}> Job Search </Title> */}
+                <>
 
-<div id="searchContainer">
-                    <SearchForm {...props} />
+                    <div className="site-page-header-ghost-wrapper">
+                        <PageHeader
+
+                            className="site-page-header"
+                            onBack={() => null}
+                            title="Job Search"
+                            extra={
+                                Auth.loggedIn() ? (
+                                    <>
+                                        <Button type="primary" onClick={Auth.logout}>Logout</Button>
+                                        {/* <Button type="primary" onClick={() => setShowSavedJobs(true)}>Saved Jobs</Button> */}
+                                    </>
+                                ) : (
+                                        <Button type="primary" onClick={() => setShowModal(true)}>Login/Signup</Button>
+                                    )}
+
+                        />
+                        {/* <SearchedJobs /> */}
+                    </div>
+                </>
+
+                <Layout>
+
+                    <Sider style={{
+        overflow: 'auto',
+        height: '580px',
+        left: 0,
+      }} >
+
+                        <div className="saved-title">
+                            Saved Jobs
                     </div>
 
+                        <SavedJobs />
 
-                </Content>
-                <Footer style={{ textAlign: 'center', fontSize: '24px' }}> <h6>&copy; 2020</h6> </Footer>
+                    </Sider>
+                    <Layout>
+
+
+
+                        <Content>
+                            <Modal
+                                footer={[
+                                    <Button key="back" onClick={() => setShowModal(false)}>
+                                        Cancel
+                    </Button>
+                                ]}
+                                title=""
+                                onCancel={() => setShowModal(false)}
+                                visible={showModal}
+                            >
+                                <LoginForm />
+                                <SignUpForm />
+                                {/* <Userpage /> */}
+                            </Modal>
+
+                            <div id="searchContainer">
+                                <SearchForm {...props} />
+                            </div>
+
+                        </Content>
+                        <Footer style={{ textAlign: 'center', fontSize: '24px' }}> <h6>&copy; 2020</h6> </Footer>
+                    </Layout>
+                </Layout>
             </Layout>
-        </Layout>
-        </Layout>
+        
     );
 
 }
