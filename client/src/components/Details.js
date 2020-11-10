@@ -20,7 +20,7 @@ return (
 
 className="site-page-header"
 onBack={() => props.history.push('/', {})}
-title="Job Search"
+title="Uncode Your Career!"
 extra={
     Auth.loggedIn() ? (
         <>
@@ -33,12 +33,12 @@ extra={
 
 /> 
     
-    
     <Layout>
-            <Sider >
-                <div className="saved-title">
-                    Saved Jobs
-                    </div>
+            
+            <Sider id="sider"style={{ overflow: 'auto', height: '700px', left: '2px', borderRadius: '5px' }} >
+                        <div className="saved-title">
+                            Saved Jobs
+                        </div>
                 <SavedJobs />
             </Sider>
     <Content style={{ margin: '24px 16px 0' }}>

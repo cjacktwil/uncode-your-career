@@ -108,15 +108,15 @@ const SearchForm = (props) => {
         <>
             <Form className="search-form"
             >
-                <Form.Item style={{ color: 'white', fontSize: "12px", padding: '10px 0px 0px 12px' }}>
+                <Form.Item id="description" style={{ color: 'white', fontSize: "12px", padding: '10px 0px 0px 12px' }}>
                     Description
     <Input id="Description" />
                 </Form.Item>
-                <Form.Item style={{ color: 'white', fontSize: "12px", padding: '10px 0px 0px 12px' }}>
+                <Form.Item id="location" style={{ color: 'white', fontSize: "12px", padding: '10px 0px 0px 12px' }}>
                     Location
     <Input id="Location" />
                 </Form.Item>
-                <Form.Item style={{ color: 'white', fontSize: "12px", padding: '10px 0px 0px 12px' }}>
+                <Form.Item id="full time" style={{ color: 'white', fontSize: "12px", padding: '10px 0px 0px 12px' }}>
                     Full Time
         <Checkbox id="FullTime" style={{ padding: '10px' }} />
 
@@ -142,7 +142,7 @@ const SearchForm = (props) => {
                     {searchedJobs.map(job => (
                         <>
 
-<div className="extender">
+            <div className="extender">
                             <Row justify="space-around" align="top">
                                 <Col span={8}>
                                     <div value={60} style={contentStyle} key={job.id}>
@@ -166,7 +166,7 @@ const SearchForm = (props) => {
                                     <Link className="extender-link"
                                         onClick={() => showDetails(job)}
                                     >
-                                        Click here to see full description..
+                                        Click here to see full description.
                                 </Link>
                                 </div>
                                             {ReactHtmlParser(job.description)}
@@ -178,8 +178,6 @@ const SearchForm = (props) => {
                             </Row>
                             
                             </div>
-                            
-                            
 
                         </>
                     ))}

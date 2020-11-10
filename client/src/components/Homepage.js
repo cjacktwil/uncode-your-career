@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
-// import Userpage from './Userpage';
 import { PageHeader } from 'antd';
 import { Layout } from 'antd';
 import Auth from '../utils/auth';
@@ -13,18 +12,14 @@ import SavedJobs from './SavedJobs';
 
 
 const { Footer, Sider, Content } = Layout;
-// const { Title } = Typography;
 
 const HomePage = (props) => {
 
     const [showModal, setShowModal] = useState(false);
-    // const [showSavedJobs, setShowSavedJobs] = useState(false);
 
     return (
-        
 
             <Layout>
-                {/* <Title level={2} style={{ textAlign: 'left'}}> Job Search </Title> */}
                 <>
 
                     <div className="site-page-header-ghost-wrapper">
@@ -32,7 +27,7 @@ const HomePage = (props) => {
 
                             className="site-page-header"
                             onBack={() => null}
-                            title="Job Search"
+                            title="Uncode Your Career!"
                             extra={
                                 Auth.loggedIn() ? (
                                     <>
@@ -50,11 +45,11 @@ const HomePage = (props) => {
 
                 <Layout>
 
-                    <Sider style={{
-        overflow: 'auto',
-        height: '580px',
-        left: 0,
-      }} >
+                    <Sider id="sider"style={{ overflow: 'auto',
+                                    height: '700px',
+                                    left: '2px',
+                                    borderRadius: '5px'
+                                }} >
 
                         <div className="saved-title">
                             Saved Jobs
@@ -65,14 +60,12 @@ const HomePage = (props) => {
                     </Sider>
                     <Layout>
 
-
-
                         <Content>
                             <Modal
                                 footer={[
                                     <Button key="back" onClick={() => setShowModal(false)}>
                                         Cancel
-                    </Button>
+                                    </Button>
                                 ]}
                                 title=""
                                 onCancel={() => setShowModal(false)}
@@ -80,7 +73,6 @@ const HomePage = (props) => {
                             >
                                 <LoginForm />
                                 <SignUpForm />
-                                {/* <Userpage /> */}
                             </Modal>
 
                             <div id="searchContainer">
