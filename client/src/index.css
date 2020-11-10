@@ -56,3 +56,17 @@
     color: white;
     padding: 10px;
   }
+
+/* Media Query */
+@media screen and (max-width: 768px) {
+  #searchContainer {
+      width: 100%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  #searchContainer {
+      width: 100%;
+      padding: 0 5px;
+  } 
+}
