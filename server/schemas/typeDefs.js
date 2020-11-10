@@ -56,13 +56,6 @@ const typeDefs = gql`
     appliedJob(input: jobInput!): User
     removeJob(id: String!): User
   }
-
-  type Query {
-    categories: [Donation]
-    user: User
-    donate(_id: ID!): Donate
-    checkout(products: [ID]!): Checkout
-  }
 `;
 
 module.exports = typeDefs;
