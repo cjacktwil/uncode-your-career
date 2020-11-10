@@ -14,6 +14,7 @@ import DonationForm from '../components/DonationForm';
 
 const { Footer, Sider, Content } = Layout;
 
+
 const HomePage = (props) => {
 
     const [showModal, setShowModal] = useState(false);
@@ -42,7 +43,8 @@ const HomePage = (props) => {
 
                             />
 
-                            {/* <SearchedJobs /> */}\, 
+                         
+
                         </div>
                     </>
                     
@@ -80,9 +82,9 @@ const HomePage = (props) => {
 
 
                 </Content>
-                <Footer>
-                    I am footer
-                </Footer>
+
+                <Footer style={{ textAlign: 'center', fontSize: '24px' }}> <h6>&copy; 2020</h6> </Footer>
+
             </Layout>
         </Layout>
         </Layout>

@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from 'react';
+
+import ReactHtmlParser from 'react-html-parser';
+import React, { useState } from 'react';
+
 import { Button, Input, Form, Checkbox, Typography, Carousel, Image } from "antd";
 import '../index.css';
 import Auth from '../utils/auth';
@@ -6,10 +9,13 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 import { GET_ME } from '../utils/queries';
 import { SAVE_JOB } from '../utils/mutations';
 // import { getSavedJobIds, saveJobIds } from '../utils/localStorage';
-const { Paragraph, Link } = Typography;
+const { Link } = Typography;
 
+const SearchForm = (props) => {
+   
+    //const [text, setArray] = useState({ jobs: [] });
 
-const SearchForm = () => {
+    const [descriptionmode, showDescription] = useState(false)
 
     // const [searchedJobs, setSearchedJobs] = useState({ jobs: [] });
     const [searchedJobs, setSearchedJobs] = useState([]);
@@ -73,36 +79,37 @@ const SearchForm = () => {
             //add jobToSave id to saved jobs array
             // setSavedJobIds([...savedJobIds, jobToSave.id]);
             // console.log(savedJobIds);
-           
+
         } catch (error) {
             console.error(error);
         }
     };
 
 
+    const showDetails = (job) =>{
+        props.history.push('/details', 
+         {job: job}
+        )
+    }
+
     return (
 
         <>
             <Form className="search-form"
             >
-                <Form.Item>
+                <Form.Item style={{ color: 'white', fontSize: "12px", padding: '10px 0px 0px 12px' }}>
                     Description
     <Input id="Description" />
                 </Form.Item>
-                <Form.Item
-
-                >
+                <Form.Item style={{ color: 'white', fontSize: "12px", padding: '10px 0px 0px 12px' }}>
                     Location
     <Input id="Location" />
                 </Form.Item>
-                <Form.Item
-
-                >
-                    Full time?
-        <Checkbox id="FullTime" />
-                </Form.Item>
-            </Form>
-            <Button onClick={() => {
+                <Form.Item style={{ color: 'white', fontSize: "12px", padding: '10px 0px 0px 12px' }}>
+                    Full Time
+        <Checkbox id="FullTime" style={{ padding: '10px'}}/>
+                
+            <Button id="searchButton" onClick={() => {
                 let desc = document.getElementById("Description").value
                 let loc = document.getElementById("Location").value
                 let fullTime = "";
@@ -115,25 +122,48 @@ const SearchForm = () => {
                 }
                 searchJobs(desc, loc, fullTime)
             }}>Search</Button>
+</Form.Item>
+            </Form>
             {searchedJobs.length ?
                 <Carousel className="search-result" autoplay>
                     {/* {searchedJobs.jobs.slice(0,3).map(job => ( */}
                     {searchedJobs.map(job => (
                         <>
                             <div key={job.id}>
+                            
                                 <Image width={50} src={job.company_logo}
-                                ></Image> <br />
+                                ></Image> _________________________Bring mice pinter here to hold current job listing, move it out to go next <br />
                                 <Link href="{job.url}" target="_blank">{job.title} </Link><br />
                                 {job.type} <br />
                               Company name: <Link href="{job.company_url}" taret="_blank">{job.company}</Link><br />
                                 {job.location}<br />
                                 <Button onClick={() => handleSaveJob(job.id)}>Save Job</Button>
                             </div>
+                            {descriptionmode ? (
+                                <div className="shortDesc">
+                                    <Button onClick={() => showDescription(false)}>Hide Description</Button>
+                                    <div className="extended">
+                                    <Link
+                                onClick={() => showDetails(job)}
+                                >
+                                    Click here to see full description..
+                                </Link>
+                                </div>
+                                    { ReactHtmlParser(job.description)}
+                                </div>
 
+                            ) :
+                                <div>
+                                    <Button onClick={() => showDescription(true)}>Description</Button>
+                                </div>
+
+                            }
+                            
+                           
                         </>
                     ))}
                 </Carousel>
-                : `Start your job search now!`}
+                : <div id="start"> Start your job search now! </div> }
 
         </>
     );
