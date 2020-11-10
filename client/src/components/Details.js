@@ -69,6 +69,7 @@ extra={
                     </Modal>
       </Content>
       </Layout>
+      <Footer style={{ textAlign: 'center', fontSize: '24px' }}> <h6>&copy; 2020</h6> </Footer>
       </Layout>
       
 )
