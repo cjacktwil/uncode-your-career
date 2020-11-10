@@ -2,7 +2,7 @@
 import ReactHtmlParser from 'react-html-parser';
 import React, { useState } from 'react';
 
-import { Button, Input, Form, Checkbox, Typography, Carousel, Image } from "antd";
+import { Button, Input, Form, Checkbox, Typography, Carousel, Image, Row, Col, Divider } from "antd";
 import '../index.css';
 import Auth from '../utils/auth';
 import { useMutation, useQuery } from '@apollo/react-hooks';
@@ -12,7 +12,7 @@ import { SAVE_JOB } from '../utils/mutations';
 const { Link } = Typography;
 
 const SearchForm = (props) => {
-   
+
     //const [text, setArray] = useState({ jobs: [] });
 
     const [descriptionmode, showDescription] = useState(false)
@@ -86,11 +86,22 @@ const SearchForm = (props) => {
     };
 
 
-    const showDetails = (job) =>{
-        props.history.push('/details', 
-         {job: job}
+    const showDetails = (job) => {
+        props.history.push('/details',
+            { job: job }
         )
     }
+    const contentStyle = {
+        lineHeight: '25px',
+        padding: '20px',
+        height: '250px'
+    };
+
+    const contentStyleRight = {
+        lineHeight: '20px',
+        padding: '20px',
+        height: '250px'
+    };
 
     return (
 
@@ -107,64 +118,76 @@ const SearchForm = (props) => {
                 </Form.Item>
                 <Form.Item style={{ color: 'white', fontSize: "12px", padding: '10px 0px 0px 12px' }}>
                     Full Time
-        <Checkbox id="FullTime" style={{ padding: '10px'}}/>
-                
-            <Button id="searchButton" onClick={() => {
-                let desc = document.getElementById("Description").value
-                let loc = document.getElementById("Location").value
-                let fullTime = "";
-                let checked = document.getElementById("FullTime").checked
-                if (checked === true) {
-                    fullTime = "true"
-                }
-                else {
-                    fullTime = "false"
-                }
-                searchJobs(desc, loc, fullTime)
-            }}>Search</Button>
-</Form.Item>
+        <Checkbox id="FullTime" style={{ padding: '10px' }} />
+
+                    <Button id="searchButton" onClick={() => {
+                        let desc = document.getElementById("Description").value
+                        let loc = document.getElementById("Location").value
+                        let fullTime = "";
+                        let checked = document.getElementById("FullTime").checked
+                        if (checked === true) {
+                            fullTime = "true"
+                        }
+                        else {
+                            fullTime = "false"
+                        }
+                        searchJobs(desc, loc, fullTime)
+                    }}>Search</Button>
+                </Form.Item>
             </Form>
+            <div className="car-container">
             {searchedJobs.length ?
                 <Carousel className="search-result" autoplay>
                     {/* {searchedJobs.jobs.slice(0,3).map(job => ( */}
                     {searchedJobs.map(job => (
                         <>
-                            <div key={job.id}>
-                            
-                                <Image width={50} src={job.company_logo}
-                                ></Image> _________________________Bring mice pinter here to hold current job listing, move it out to go next <br />
-                                <Link href="{job.url}" target="_blank">{job.title} </Link><br />
-                                {job.type} <br />
+
+<div className="extender">
+                            <Row justify="space-around" align="top">
+                                <Col span={8}>
+                                    <div value={60} style={contentStyle} key={job.id}>
+
+                                        <Image width={50} src={job.company_logo}
+                                        ></Image> <br />
+                                        <Link href="{job.url}" target="_blank">{job.title} </Link><br />
+                                        {job.type} <br />
                               Company name: <Link href="{job.company_url}" taret="_blank">{job.company}</Link><br />
-                                {job.location}<br />
-                                <Button onClick={() => handleSaveJob(job.id)}>Save Job</Button>
-                            </div>
-                            {descriptionmode ? (
-                                <div className="shortDesc">
-                                    <Button onClick={() => showDescription(false)}>Hide Description</Button>
-                                    <div className="extended">
-                                    <Link
-                                onClick={() => showDetails(job)}
-                                >
-                                    Click here to see full description..
+                                        {job.location}<br />
+                                        <Button className="savejob-button" onClick={() => handleSaveJob(job.id)}>Save Job</Button>
+                                    </div>
+                                </Col>
+                                
+                                <Col span={16}>
+                                
+                                    <div value={100} style={contentStyleRight} className="shortDesc">
+                                        
+                                        <div className="desc-text"  > 
+                                        <div className="description-link">
+                                    <Link className="extender-link"
+                                        onClick={() => showDetails(job)}
+                                    >
+                                        Click here to see full description..
                                 </Link>
                                 </div>
-                                    { ReactHtmlParser(job.description)}
-                                </div>
-
-                            ) :
-                                <div>
-                                    <Button onClick={() => showDescription(true)}>Description</Button>
-                                </div>
-
-                            }
+                                            {ReactHtmlParser(job.description)}
+                                        </div>
+                                        
+                                    </div>
+                                </Col>
                             
-                           
+                            </Row>
+                            
+                            </div>
+                            
+                            
+
                         </>
                     ))}
-                </Carousel>
-                : <div id="start"> Start your job search now! </div> }
 
+                </Carousel>
+
+                : <div id="start"> Start your job search now! </div>}
+</div>
         </>
     );
 };
