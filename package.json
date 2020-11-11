@@ -25,6 +25,7 @@
     "react-html-parser": "^2.0.2"
   },
   "devDependencies": {
-    "concurrently": "^5.2.0"
+    "concurrently": "^5.2.0",
+    "webpack-pwa-manifest": "^4.2.0"
   }
 }
