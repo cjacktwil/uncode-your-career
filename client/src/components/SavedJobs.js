@@ -22,8 +22,13 @@ const SavedJobs = () => {
     
         const handleUpdateJob = async(id, applied, app_date, notes) => {
         console.log(id);
-        // const jobToUpdate = userData.savedJobs.find((job) => job.id === jobId);
-        // console.log(jobToUpdate);
+        const jobToUpdate = userData.savedJobs.find((job) => job.id === id);
+        console.log(jobToUpdate);
+        jobToUpdate.applied = applied;
+        jobToUpdate.application_date = app_date;
+        jobToUpdate.notes = notes;
+        console.log(jobToUpdate)
+        // const updatedJob = jobToUpdate.
 
         // let applied = false;
         // let checked = document.getElementById("applied").checked
@@ -43,7 +48,7 @@ const SavedJobs = () => {
         
                 try {
                     const { data } = await updateJob({
-                        variables: { id, applied, app_date, notes }
+                        variables: { input: jobToUpdate }
                     });
           
                     if (error) {
@@ -83,31 +88,7 @@ const SavedJobs = () => {
 
     }    
 
-    // const handleApplyJob = async (jobId) => {
-    //     const jobToApply = userData.savedJobs.find((job) => job.id === jobId);
-    //console.log(jobToApply);
-
-    //     const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-    //     if (!token) {
-    //         return false;
-    //     }
-
-    //     try {
-    //         const { data } = await applyToJob({
-    //             variables: { input: jobToApply }
-    //         });
-
-    //         if (error) {
-    //             throw new Error ('Something went wrong')
-    //         }
-
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
-
-    return (
+      return (
         <>
         <h3>Saved Jobs</h3>
 
@@ -125,7 +106,7 @@ const SavedJobs = () => {
                               Company name: <Link href={job.company_url} target="_blank">{job.company}</Link><br />
                                         {job.location}<br />
                                         <Button onClick={() => handleRemoveJob(job.id)}>Remove Job</Button>
-                                        {/* {job.applied ? (
+                                        {job.applied ? (
                                             <>
                                                 <Form>
                                                     <Form.Item>Date Applied
@@ -148,21 +129,19 @@ const SavedJobs = () => {
                                 ) : (
                                 <Form>
                                                     <Form.Item>I've applied for this job
-                                <Checkbox id="applied" onClick={() => {
+                                                        <Checkbox id="applied" onClick={() => {
                                     let applied = false;
                                     let checked = document.getElementById("applied").checked;
                                     if (checked === true) {
                                         applied = true
                                     }                                   
-                                    // let jobId = job._id;
                                     handleUpdateJob(job.id, applied)
-                                }}
-                                    />
+                                }}/>
                                     </Form.Item>
-                                    </Form> */}
+                                    </Form>
                                
-                                        {/* )}; */}
-                                                                        </div>
+                                    )};
+                                                                                                            </div>
                             </Card>
 
                             </>

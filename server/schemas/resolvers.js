@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Jobs } = require('../models');
+const { User } = require('../models');
 const jobSchema = require('../models/Jobs');
 const { signToken } = require('../utils/auth');
 
@@ -66,15 +66,14 @@ const resolvers = {
       throw new AuthenticationError('You must log in to save a job.');
     },
 
-updateJob: async (parent, { id }, context) => {
+updateJob: async (parent, { input }, context) => {
   // if (context.user) {
     // console.log(id);
-    const updatedJob = await User.findOne({savedJobs: {id: id}});
-  //   AndUpdate(
-  //     {savedJobs: {id: id}}, 
-  //     {savedJobs: { applied: true }}, 
-  //     {new: true});
-  //  return updatedJob;
+    const updatedJob = await User.findOneAndUpdate(
+      {savedJobs: {id: id}}, 
+      {savedJobs: { applied: true }}, 
+      {new: true});
+   return updatedJob;
     console.log(updatedJob);
 
     // const updatedUser =  await User.findByIdAndUpdate(
