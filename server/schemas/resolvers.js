@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, Jobs } = require('../models');
 const jobSchema = require('../models/Jobs');
 const { signToken } = require('../utils/auth');
 
@@ -66,29 +66,49 @@ const resolvers = {
       throw new AuthenticationError('You must log in to save a job.');
     },
 
-appliedJob: async (parent, { input }, context) => {
-  if (context.user) {
+updateJob: async (parent, { id }, context) => {
+  // if (context.user) {
+    // console.log(id);
+    const updatedJob = await User.findOne({savedJobs: {id: id}});
+  //   AndUpdate(
+  //     {savedJobs: {id: id}}, 
+  //     {savedJobs: { applied: true }}, 
+  //     {new: true});
+  //  return updatedJob;
+    console.log(updatedJob);
 
-    const updatedUser = await User.findByIdAndUpdate(
-      { _id: context.user._id},
-      { $addToSet: { appliedJob: input } },
-      { new: true }
-    ).populate('appliedJob');
-    return updatedUser;
-  }
-  throw new AuthenticationError('You must be logged in to manage your jobs.');
-},
+    // const updatedUser =  await User.findByIdAndUpdate(
+    //   {_id: context.user._id },
+    //   {$pull: {savedJobs: {id: id}}},
+    //   {$push: {savedJobs: updatedJob}},
+    //   // {new: true}
+    // ).populate('savedJobs');
+    // return updatedUser;
+  // };
+  // throw new AuthenticationError('You must log in to update a job.');
+  // }
+// await Jobs.findByIdAndUpdate(
+//       {id: args.id},
+//       { $push: { args } },
+//       {new: true }
+//     )
+    // .populate('savedJobs')
+    // return updatedUser;
+  //  }
+  //  throw new AuthenticationError('You must log in to update this job.')
+  },
 
-removeJob: async (parent, { jobId }, context) => {
+removeJob: async (parent, { id }, context) => {
   if (context.user) {
     const updatedUser = await User.findByIdAndUpdate(
       { _id: context.user._id },
-      { $pull: { savedJobs: { id: jobId }, appliedJob: { id: jobId } } },
+      { $pull: { savedJobs: { id: id } } },
       { new: true }
     );
     return updatedUser;
+    // console.log(updatedUser);
   }
-  throw new AuthenticationError('You must be logged into manage your jobs.');
+  throw new AuthenticationError('You must be logged in to manage your jobs.');
 }
   },
 

@@ -149,9 +149,9 @@ const SearchForm = (props) => {
 
                                                 <Image width={50} src={job.company_logo}
                                                 ></Image> <br />
-                                                <Link href="{job.url}" target="_blank">{job.title} </Link><br />
+                                                <Link href={job.url} target="_blank">{job.title} </Link><br />
                                                 {job.type} <br />
-                              Company name: <Link href="{job.company_url}" taret="_blank">{job.company}</Link><br />
+                              Company name: <Link href={job.company_url} target="_blank">{job.company}</Link><br />
                                                 {job.location}<br />
                                                 <Button className="savejob-button" onClick={() => handleSaveJob(job.id)}>Save Job</Button>
                                             </div>

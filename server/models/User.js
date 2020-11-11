@@ -20,8 +20,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    savedJobs: [jobSchema],
-    appliedJobs: [jobSchema]
+    savedJobs: [jobSchema]
   });
 
 // hash user password

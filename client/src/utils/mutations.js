@@ -31,6 +31,7 @@ mutation saveJob($input: jobInput!) {
     username
     email
     savedJobs {
+      _id
       id
       type
       url
@@ -42,18 +43,22 @@ mutation saveJob($input: jobInput!) {
       company_url
       company_logo
       how_to_apply
+      applied
+      application_date
+      notes
     }
   }
 }
 `;
 
-export const APPLIED_JOB = gql`
-mutation appliedJob($input: jobInput!) {
-  appliedJob(input: $input) {
+export const UPDATE_JOB = gql`
+mutation updateJob($applied: Boolean, $app_date: String, $notes: String ) {
+  updateJob(applied: $applied, application_date: $app_date, notes: $notes) {
     _id
     username
     email
-    appliedJobs {
+    savedJobs {  
+      _id
       id
       type
       url
@@ -65,10 +70,35 @@ mutation appliedJob($input: jobInput!) {
       company_url
       company_logo
       how_to_apply
+      applied
+      application_date
+      notes
     }
   }
 }
 `;
+// export const APPLIED_JOB = gql`
+// mutation appliedJob($input: jobInput!) {
+//   appliedJob(input: $input) {
+//     _id
+//     username
+//     email
+//     appliedJobs {
+//       id
+//       type
+//       url
+//       created_at
+//       company
+//       location
+//       title
+//       description
+//       company_url
+//       company_logo
+//       how_to_apply
+//     }
+//   }
+// }
+// `;
 
 export const REMOVE_JOB = gql`
 mutation removeJob($id: String!) {
@@ -77,6 +107,7 @@ mutation removeJob($id: String!) {
     username
     email
     savedJobs {
+      _id
       id
       type
       url
@@ -88,22 +119,17 @@ mutation removeJob($id: String!) {
       company_url
       company_logo
       how_to_apply
-    }
-    appliedJobs {
-      id
-      type
-      url
-      created_at
-      company
-      location
-      title
-      description
-      company_url
-      company_logo
-      how_to_apply
+      applied
+      application_date
+      notes
     }
   }
 }
 `;
 
 
+// _id
+// username
+// email
+// savedJobs {
+// }
