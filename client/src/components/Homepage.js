@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
-// import Userpage from './Userpage';
 import { PageHeader } from 'antd';
 import { Layout } from 'antd';
 import Auth from '../utils/auth';
@@ -13,23 +12,23 @@ import SavedJobs from './SavedJobs';
 
 
 const { Footer, Sider, Content } = Layout;
-// const { Title } = Typography;
 
 const HomePage = (props) => {
 
     const [showModal, setShowModal] = useState(false);
-    // const [showSavedJobs, setShowSavedJobs] = useState(false);
 
     return (
-        <Layout>
-            {/* <Title level={2} style={{ textAlign: 'left'}}> Job Search </Title> */}
         <>
+            
+                <Layout>
+                    <>
+
                         <div className="site-page-header-ghost-wrapper">
                             <PageHeader
-                                
+
                                 className="site-page-header"
                                 onBack={() => null}
-                                title="Job Search"
+                                title="Uncode Your Career!"
                                 extra={
                                     Auth.loggedIn() ? (
                                         <>
@@ -44,44 +43,56 @@ const HomePage = (props) => {
                             {/* <SearchedJobs /> */}
                         </div>
                     </>
-                    
-        <Layout>
-            <Sider >
-                <div className="saved-title">
-                    Saved Jobs
-                    </div>
-                <SavedJobs />
-            </Sider>
-            <Layout>
-                
-                    
-                
-                <Content>
-                    <Modal
-                        footer={[
-                            <Button key="back" onClick={() => setShowModal(false)}>
-                                Cancel
-                    </Button>
-                        ]}
-                        title=""
-                        onCancel={() => setShowModal(false)}
-                        visible={showModal}
-                    >
-                        <LoginForm />
-                        <SignUpForm />
-                        {/* <Userpage /> */}
-                    </Modal>
 
-<div id="searchContainer">
-                    <SearchForm {...props} />
+                    <Layout>
+
+                        <Sider id="sider" style={{
+                            overflow: 'auto',
+                            height: '700px',
+                            left: '2px',
+                            borderRadius: '5px'
+                        }} >
+
+                            <div className="saved-title">
+                                Saved Jobs
                     </div>
 
+                            <SavedJobs />
 
-                </Content>
-                <Footer style={{ textAlign: 'center', fontSize: '24px' }}> <h6>&copy; 2020</h6> </Footer>
-            </Layout>
-        </Layout>
-        </Layout>
+                        </Sider>
+                        <Layout>
+
+                            <Content>
+                                <Modal
+                                    footer={[
+                                        <Button key="back" onClick={() => setShowModal(false)}>
+                                            Cancel
+                                    </Button>
+                                    ]}
+                                    title=""
+                                    onCancel={() => setShowModal(false)}
+                                    visible={showModal}
+                                >
+                                    <LoginForm />
+                                    <SignUpForm />
+                                </Modal>
+
+                                <div id="searchContainer">
+                                    <SearchForm {...props} />
+                                </div>
+
+                            </Content>
+                            <div className="mobile-view">
+                                Saved Jobs
+                                <SavedJobs />
+                            </div>
+                            <Footer style={{ textAlign: 'center', fontSize: '24px' }}> <h6>&copy; 2020</h6> </Footer>
+                        </Layout>
+                    </Layout>
+                </Layout>
+           
+
+        </>
     );
 
 }
