@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import Auth from '../utils/auth'
-import { Layout, Image, Button, Modal } from 'antd'
-import { PageHeader } from 'antd'
+import { Layout, Image, Button, Modal, PageHeader, Typography } from 'antd'
+// import { PageHeader } from 'antd'
 import ReactHtmlParser from 'react-html-parser';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
@@ -10,6 +10,7 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 import { SAVE_JOB } from '../utils/mutations';
 
 const { Content, Footer, Sider } = Layout
+const { Link } = Typography;
 
 
 const Details = (props) => {
@@ -83,8 +84,8 @@ const Details = (props) => {
                             <Image width={50} src={job.company_logo}
                             ></Image>
                             <Button className="savejob-button" onClick={() => handleSaveJob()}>Save Job</Button><br />
-                            {job.title}<br />
-                            {job.company}<br />
+                            <Link href={job.url} target="_blank">{job.title}</Link><br />
+                            <Link href={job.company_url} target="_blank">{job.company}</Link><br />
                             {job.location}<br />
 
                             {ReactHtmlParser(job.description)}

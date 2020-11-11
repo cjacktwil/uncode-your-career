@@ -67,20 +67,25 @@ const resolvers = {
     },
 
 updateJob: async (parent, { id }, context) => {
-  if (context.user) {
+  // if (context.user) {
     // console.log(id);
-    const updatedJob = await Jobs.findOne({_id: id});
+    const updatedJob = await User.findOne({savedJobs: {id: id}});
+  //   AndUpdate(
+  //     {savedJobs: {id: id}}, 
+  //     {savedJobs: { applied: true }}, 
+  //     {new: true});
   //  return updatedJob;
     console.log(updatedJob);
 
     // const updatedUser =  await User.findByIdAndUpdate(
-    //   {_id: context.user.id },
+    //   {_id: context.user._id },
+    //   {$pull: {savedJobs: {id: id}}},
     //   {$push: {savedJobs: updatedJob}},
-    //   {new: true}
+    //   // {new: true}
     // ).populate('savedJobs');
     // return updatedUser;
-  };
-  throw new AuthenticationError('You must log in to update a job.');
+  // };
+  // throw new AuthenticationError('You must log in to update a job.');
   // }
 // await Jobs.findByIdAndUpdate(
 //       {id: args.id},

@@ -14,14 +14,14 @@ const { Paragraph, Link } = Typography;
 const { TextArea } = Input;
 
 const SavedJobs = () => {
-    // const [updateJob, { error }] = useMutation(UPDATE_JOB);
-    const [removeJob, { error }] = useMutation(REMOVE_JOB);
+    const [updateJob, { error }] = useMutation(UPDATE_JOB);
+    const [removeJob, { e }] = useMutation(REMOVE_JOB);
     const { loading, data } = useQuery(GET_ME);
     const userData = data?.me || {};
     console.log(userData);
     
-        // const handleUpdateJob = async(jobId, applied, app_date, notes) => {
-    //     console.log(jobId);
+        const handleUpdateJob = async(id, applied, app_date, notes) => {
+        console.log(id);
         // const jobToUpdate = userData.savedJobs.find((job) => job.id === jobId);
         // console.log(jobToUpdate);
 
@@ -32,31 +32,31 @@ const SavedJobs = () => {
         // } else {
         //     applied = "false"
         // }
-                // get token
-                // const token = Auth.loggedIn() ? Auth.getToken() : null;
+                //get token
+                const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-                // if (!token) {
-                //     return false;
-                // }
+                if (!token) {
+                    return false;
+                }
         
-                // console.log(token);
+                console.log(token);
         
-                // try {
-                //     const { data } = await updateJob({
-                //         variables: { id: jobId, applied: applied, application_date: app_date, notes: notes }
-                //     });
+                try {
+                    const { data } = await updateJob({
+                        variables: { id, applied, app_date, notes }
+                    });
           
-                //     if (error) {
-                //         throw new Error('something went wrong!');
-                //     }
-                    //add jobToSave id to saved jobs array
+                    if (error) {
+                        throw new Error('something went wrong!');
+                    }
+                    // add jobToSave id to saved jobs array
                     // setSavedJobIds([...savedJobIds, jobToSave.id]);
                     // console.log(savedJobIds);
         
-            //     } catch (error) {
-            //         console.error(error);
-            //     }
-            // };
+                } catch (error) {
+                    console.error(error);
+                }
+            };
     // const savedJobs = userData?.savedJobs || [''];
     // console.log(savedJobs);
 
@@ -140,8 +140,8 @@ const SavedJobs = () => {
                                                 <Button onClick={() => {
                                                     let app_date = document.getElementById("Application_Date").value
                                                     let notes = document.getElementById("Job_notes").value
-                                                    let jobId = job.id;
-                                                    handleUpdateJob(jobId, app_date, notes)
+                                                    // let jobId = job.id;
+                                                    handleUpdateJob(job.id, app_date, notes)
                                                    
                                                 }}></Button>
                                                 </>
@@ -154,15 +154,15 @@ const SavedJobs = () => {
                                     if (checked === true) {
                                         applied = true
                                     }                                   
-                                    let jobId = job._id;
-                                    handleUpdateJob(jobId, applied)
+                                    // let jobId = job._id;
+                                    handleUpdateJob(job.id, applied)
                                 }}
                                     />
                                     </Form.Item>
                                     </Form> */}
                                
                                         {/* )}; */}
-                                </div>
+                                                                        </div>
                             </Card>
 
                             </>

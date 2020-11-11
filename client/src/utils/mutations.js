@@ -52,8 +52,12 @@ mutation saveJob($input: jobInput!) {
 `;
 
 export const UPDATE_JOB = gql`
-mutation updateJob($applied: Boolean, $application_date: String, $notes: String ) {
-  updateJob(applied: $applied, application_date: $application_date, notes: $notes) {
+mutation updateJob($applied: Boolean, $app_date: String, $notes: String ) {
+  updateJob(applied: $applied, application_date: $app_date, notes: $notes) {
+    _id
+    username
+    email
+    savedJobs {  
       _id
       id
       type
@@ -69,6 +73,7 @@ mutation updateJob($applied: Boolean, $application_date: String, $notes: String 
       applied
       application_date
       notes
+    }
   }
 }
 `;
