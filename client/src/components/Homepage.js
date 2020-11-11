@@ -81,12 +81,14 @@ const HomePage = (props) => {
                                 onCancel={() => setShowModal(false)}
                                 visible={showModal}
                             >
-                                <LoginForm />
-                                <SignUpForm />
+                                {/* <LoginForm />
+                                <SignUpForm /> */}
                                 <Elements stripe={stripePromise}>
                                 <DonationForm />
                                 </Elements>
                             </Modal>
+
+         
 
                             <div id="searchContainer">
                                 <SearchForm {...props} />

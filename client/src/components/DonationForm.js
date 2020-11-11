@@ -35,7 +35,7 @@ const DonationForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const [amountFormData, setAmountFormData] = useState({ amount: '' });
+  const [amountFormData, setAmountFormData] = useState({ amount: ''});
   
 
   const handleInputChange = (event) => {
@@ -69,11 +69,11 @@ const DonationForm = () => {
 
   return (
     <>
-    Amount 
+    Donation Amount: 
     <Form.Item
         onChange={handleInputChange}
         value={amountFormData.amount}
-        label="Amount"
+        label=""
 
         rules={[
           {
@@ -84,12 +84,35 @@ const DonationForm = () => {
       >
 
         <Input name="Amount" />
+
+        
       </Form.Item>
-     
+    <>
+    Name on Card:
+    <Form.Item
+        onChange={handleInputChange}
+        value={amountFormData.name}
+        label=""
+
+        rules={[
+          {
+            required: true,
+            message: 'Please input your name.',
+          },
+        ]}
+      >
+
+        <Input name="Name" />
+
+        
+      </Form.Item>
+    </>
+
+
     <form onSubmit={handleSubmit}>
       <div className="form-row">
         <label for="card-element">
-          Credit or debit card
+          Credit or Debit Card:
         </label>
         <CardElement
           id="card-element"
@@ -98,7 +121,7 @@ const DonationForm = () => {
         />
         <div className="card-errors" role="alert">{error}</div>
       </div>
-      <button type="submit">Submit Payment</button>
+      <button type="submit">Thank you!😃</button>
     </form>
   </>);
 }

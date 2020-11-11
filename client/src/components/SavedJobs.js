@@ -8,7 +8,7 @@ import { Card, Image, Button, Typography, Row, Col } from 'antd';
 import Auth from '../utils/auth';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { GET_ME } from '../utils/queries';
-// import { getSavedJobIds } from '../utils/localStorage';
+import { getSavedJobIds } from '../utils/localStorage';
 const { Paragraph, Link } = Typography;
 
 const SavedJobs = () => {
