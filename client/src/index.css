@@ -31,10 +31,9 @@
       height: 100%;
       min-height: 700px;
       border-radius: 5px;
-      /* background-image: url("./jobsearch.jpg");
+      background-image: url("./jobsearch.jpg");
       background-size: cover;
-      background-repeat: no-repeat; */
-      background-color: gray;
+      background-repeat: no-repeat;
   }
 
 
@@ -87,7 +86,7 @@
 }
 
 /* Extra Small Devices, Phones */ 
-@media (min-width : 812px) {
+@media (max-width : 812px) {
   #searchContainer{
     margin: 0 5px;
     height: 100%;
@@ -100,7 +99,7 @@
 }
 
 /* Small Devices */
-@media (min-width : 768px) {
+@media (max-width : 768px) {
   #searchContainer{
     margin: 0 5px;
     height: 100%;
@@ -113,7 +112,7 @@
 }
 
 /* Tablets */ 
-@media (min-width : 1024px) {
+@media (max-width : 1024px) {
   #searchContainer{
     margin: 0 5px;
     height: 100%;
