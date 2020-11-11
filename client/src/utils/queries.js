@@ -7,6 +7,7 @@ export const GET_ME = gql`
       username
       email
       savedJobs {
+        _id
         id
         type
         url
@@ -19,6 +20,7 @@ export const GET_ME = gql`
         company_logo
         how_to_apply
         applied
+        application_date
         notes
       }
     }

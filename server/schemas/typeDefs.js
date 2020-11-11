@@ -9,6 +9,7 @@ const typeDefs = gql`
   }
 
   type Jobs {
+    _id: ID!
     id: String!
     type: String!
     url: String!
@@ -21,6 +22,7 @@ const typeDefs = gql`
     company_logo: String
     how_to_apply: String
     applied: Boolean
+    application_date: String
     notes: String
   }
 
@@ -35,8 +37,9 @@ const typeDefs = gql`
     description: String
     company_url: String
     company_logo: String
-    how_to_apply: 
+    how_to_apply: String
     applied: Boolean
+    application_date: String
     notes: String
   }
   
@@ -55,6 +58,7 @@ const typeDefs = gql`
     login(username: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     saveJob(input: jobInput!): User
+    updateJob(applied: Boolean, application_date: String, notes: String): Jobs
     removeJob(id: String!): User
   }
 `;
@@ -69,4 +73,4 @@ module.exports = typeDefs;
     // searchJobs(title: String, location: String, type: String): [Jobs]
     // job(id: String!): Jobs
 
-
+    // applied: Boolean, application_date: String, notes: String

@@ -31,7 +31,7 @@ export const loginUser = (userData) => {
 
 
 
-export const searchGithubJobs = (params) => {
-  const url = `https://jobs.github.com/positions.json?`;
-  return fetch(url + params);
-};
+// export const searchGithubJobs = (params) => {
+//   const url = `https://jobs.github.com/positions.json?`;
+//   return fetch(url + params);
+// };

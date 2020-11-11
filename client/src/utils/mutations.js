@@ -31,6 +31,7 @@ mutation saveJob($input: jobInput!) {
     username
     email
     savedJobs {
+      _id
       id
       type
       url
@@ -43,12 +44,34 @@ mutation saveJob($input: jobInput!) {
       company_logo
       how_to_apply
       applied
+      application_date
       notes
     }
   }
 }
 `;
 
+export const UPDATE_JOB = gql`
+mutation updateJob($applied: Boolean, $application_date: String, $notes: String ) {
+  updateJob(applied: $applied, application_date: $application_date, notes: $notes) {
+      _id
+      id
+      type
+      url
+      created_at
+      company
+      location
+      title
+      description
+      company_url
+      company_logo
+      how_to_apply
+      applied
+      application_date
+      notes
+  }
+}
+`;
 // export const APPLIED_JOB = gql`
 // mutation appliedJob($input: jobInput!) {
 //   appliedJob(input: $input) {
@@ -79,6 +102,7 @@ mutation removeJob($id: String!) {
     username
     email
     savedJobs {
+      _id
       id
       type
       url
@@ -91,6 +115,7 @@ mutation removeJob($id: String!) {
       company_logo
       how_to_apply
       applied
+      application_date
       notes
     }
   }
@@ -98,3 +123,8 @@ mutation removeJob($id: String!) {
 `;
 
 
+// _id
+// username
+// email
+// savedJobs {
+// }
