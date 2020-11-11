@@ -1,5 +1,5 @@
 
-import ReactHtmlParser from 'react-html-parser';
+// import ReactHtmlParser from 'react-html-parser';
 import React, { useState } from 'react';
 
 import { Button, Input, Form, Checkbox, Typography, Carousel, Image, Row, Col, Divider } from "antd";
@@ -169,7 +169,7 @@ const SearchForm = (props) => {
                                         Click here to see full description.
                                 </Link>
                                 </div>
-                                            {ReactHtmlParser(job.description)}
+                                            {/* {ReactHtmlParser(job.description)} */}
                                         </div>
                                         
                                     </div>

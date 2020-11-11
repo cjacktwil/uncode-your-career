@@ -2,7 +2,7 @@ import React, {useState} from "react"
 import Auth from '../utils/auth'
 import {Layout, Image, Button, Modal} from 'antd'
 import {PageHeader} from 'antd'
-import ReactHtmlParser from 'react-html-parser';
+// import ReactHtmlParser from 'react-html-parser';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 import SavedJobs from './SavedJobs';
@@ -50,7 +50,7 @@ extra={
     {job.company}<br/>
     {job.location}<br/>
 
-    { ReactHtmlParser(job.description)}
+    {/* { ReactHtmlParser(job.description)} */}
     </>
         </div>
         <Modal
