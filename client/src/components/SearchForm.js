@@ -136,56 +136,86 @@ const SearchForm = (props) => {
                 </Form.Item>
             </Form>
             <div className="car-container">
-            {searchedJobs.length ?
-                <Carousel className="search-result" autoplay>
-                    {/* {searchedJobs.jobs.slice(0,3).map(job => ( */}
-                    {searchedJobs.map(job => (
-                        <>
+                {searchedJobs.length ?
+                    <Carousel className="search-result" autoplay>
+                        {/* {searchedJobs.jobs.slice(0,3).map(job => ( */}
+                        {searchedJobs.map(job => (
+                            <>
 
-            <div className="extender">
-                            <Row justify="space-around" align="top">
-                                <Col span={8}>
-                                    <div value={60} style={contentStyle} key={job.id}>
+                                <div className="extender">
+                                    <Row justify="space-around" align="top">
+                                        <Col span={8}>
+                                            <div value={60} style={contentStyle} key={job.id}>
 
+                                                <Image width={50} src={job.company_logo}
+                                                ></Image> <br />
+                                                <Link href="{job.url}" target="_blank">{job.title} </Link><br />
+                                                {job.type} <br />
+                              Company name: <Link href="{job.company_url}" taret="_blank">{job.company}</Link><br />
+                                                {job.location}<br />
+                                                <Button className="savejob-button" onClick={() => handleSaveJob(job.id)}>Save Job</Button>
+                                            </div>
+                                        </Col>
+
+                                        <Col span={16}>
+
+                                            <div value={100} style={contentStyleRight} className="shortDesc">
+
+                                                <div className="desc-text"  >
+                                                    <div className="description-link">
+                                                        <Link className="extender-link"
+                                                            onClick={() => showDetails(job)}
+                                                        >
+                                                            Click here to see full description.
+                                </Link>
+                                                    </div>
+                                                    {ReactHtmlParser(job.description)}
+                                                </div>
+
+                                            </div>
+                                        </Col>
+
+                                    </Row>
+
+                                </div>
+
+                            </>
+                        ))}
+
+                    </Carousel>
+
+                    : <div id="start"> 
+                    <p>Start your job</p>
+                      search now! </div>}
+            </div>
+            <div className="mobile-view">
+                {searchedJobs.length ?
+                    <Carousel className="search-result" autoplay>
+                        {/* {searchedJobs.jobs.slice(0,3).map(job => ( */}
+                        {searchedJobs.map(job => (
+                            <>
                                         <Image width={50} src={job.company_logo}
                                         ></Image> <br />
                                         <Link href="{job.url}" target="_blank">{job.title} </Link><br />
                                         {job.type} <br />
                               Company name: <Link href="{job.company_url}" taret="_blank">{job.company}</Link><br />
                                         {job.location}<br />
-                                        <Button className="savejob-button" onClick={() => handleSaveJob(job.id)}>Save Job</Button>
-                                    </div>
-                                </Col>
+                                        <Button className="savejob-button" onClick={() => handleSaveJob(job.id)}>Save Job</Button><br />
                                 
-                                <Col span={16}>
-                                
-                                    <div value={100} style={contentStyleRight} className="shortDesc">
-                                        
-                                        <div className="desc-text"  > 
-                                        <div className="description-link">
-                                    <Link className="extender-link"
-                                        onClick={() => showDetails(job)}
-                                    >
-                                        Click here to see full description.
+                                                <Link className="extender-link"
+                                                    onClick={() => showDetails(job)}
+                                                >
+                                                    Click here to see full description.
                                 </Link>
-                                </div>
-                                            {ReactHtmlParser(job.description)}
-                                        </div>
-                                        
-                                    </div>
-                                </Col>
-                            
-                            </Row>
-                            
-                            </div>
+                                
 
-                        </>
-                    ))}
+                            </>
+                        ))}
 
-                </Carousel>
+                    </Carousel>
 
-                : <div id="start"> Start your job search now! </div>}
-</div>
+                    : <div id="start"> Start your job search now! </div>}
+            </div>
         </>
     );
 };
