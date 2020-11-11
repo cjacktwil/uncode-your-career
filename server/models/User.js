@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const Jobs = require('./Jobs');
+const jobSchema = require('./Jobs');
 
 const userSchema = new Schema(
   {
@@ -20,7 +20,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    savedJobs: [Jobs.schema]
+    savedJobs: [jobSchema]
   });
 
 // hash user password

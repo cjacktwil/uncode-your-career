@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
 
 // const interviewSchema = require('./Interviews');
 const jobSchema = new Schema(
@@ -48,8 +48,6 @@ const jobSchema = new Schema(
 }
 );
 
-const Jobs = model('Jobs', jobSchema);
-
-module.exports = Jobs;
+module.exports = jobSchema;
 
         //   unique: true  

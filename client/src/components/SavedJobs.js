@@ -14,13 +14,13 @@ const { Paragraph, Link } = Typography;
 const { TextArea } = Input;
 
 const SavedJobs = () => {
+    // const [updateJob, { error }] = useMutation(UPDATE_JOB);
+    const [removeJob, { error }] = useMutation(REMOVE_JOB);
     const { loading, data } = useQuery(GET_ME);
     const userData = data?.me || {};
     console.log(userData);
-    const [removeJob, { error }] = useMutation(REMOVE_JOB);
-    // const [updateJob, { error }] = useMutation(UPDATE_JOB);
-
-    // const handleUpdateJob = async(jobId, applied, app_date, notes) => {
+    
+        // const handleUpdateJob = async(jobId, applied, app_date, notes) => {
     //     console.log(jobId);
         // const jobToUpdate = userData.savedJobs.find((job) => job.id === jobId);
         // console.log(jobToUpdate);
@@ -60,21 +60,22 @@ const SavedJobs = () => {
     // const savedJobs = userData?.savedJobs || [''];
     // console.log(savedJobs);
 
-    const handleRemoveJob = async(jobId) => {
-        console.log(jobId);
+    const handleRemoveJob = async(id) => {
+        console.log(id);
 
         const token = Auth.loggedIn() ? Auth.getToken() : null;
-
+        console.log(token);
+        
         if(!token) {
             return false;
         }
 
         try { 
             const { data } = await removeJob({
-                variables: { jobId }
+                variables: { id }
             });
             if (error) {
-                throw new Error('Something went wrong demoving this job')
+                throw new Error('Something went wrong removing this job')
             }
         } catch (err) {
             console.error(err);

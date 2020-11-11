@@ -93,14 +93,15 @@ updateJob: async (parent, { id }, context) => {
   //  throw new AuthenticationError('You must log in to update this job.')
   },
 
-removeJob: async (parent, { jobId }, context) => {
+removeJob: async (parent, { id }, context) => {
   if (context.user) {
     const updatedUser = await User.findByIdAndUpdate(
       { _id: context.user._id },
-      { $pull: { savedJobs: { id: jobId } } },
+      { $pull: { savedJobs: { id: id } } },
       { new: true }
     );
     return updatedUser;
+    // console.log(updatedUser);
   }
   throw new AuthenticationError('You must be logged in to manage your jobs.');
 }
