@@ -58,7 +58,7 @@ const SavedJobs = () => {
             
                 {/* <Col span={8}>  */}
                 <Card>
-                <div key={job.id}>
+                <div className="saved-card" key={job.id}>
                                 <Image width={50} src={job.company_logo}
                                 ></Image> <br />
                                 <Link href="{job.url}" target="_blank">{job.title} </Link><br />
