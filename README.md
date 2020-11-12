@@ -1,5 +1,4 @@
-# Job Search
-Group Project 3
+# Uncode Your Career!
 
 ## Table of Contents
 - [Table of Contents](#table-of-contents)
