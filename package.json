@@ -23,7 +23,8 @@
     "apollo-boost": "^0.4.9",
     "apollo-server-express": "^2.18.2",
     "if-env": "^1.0.4",
-    "react-html-parser": "^2.0.2"
+    "react-html-parser": "^2.0.2",
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
