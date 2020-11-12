@@ -58,7 +58,7 @@ const typeDefs = gql`
     login(username: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     saveJob(input: jobInput!): User
-    updateJob(applied: Boolean, application_date: String, notes: String): User
+    updateJob(input: jobInput!): User
     removeJob(id: String!): User
   }
 `;

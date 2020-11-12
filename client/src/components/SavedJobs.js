@@ -25,9 +25,10 @@ const SavedJobs = () => {
         const jobToUpdate = userData.savedJobs.find((job) => job.id === id);
         console.log(jobToUpdate);
         jobToUpdate.applied = applied;
-        jobToUpdate.application_date = app_date;
-        jobToUpdate.notes = notes;
+        // jobToUpdate.application_date = app_date;
+        // jobToUpdate.notes = notes;
         console.log(jobToUpdate)
+        
         // const updatedJob = jobToUpdate.
 
         // let applied = false;
@@ -48,7 +49,7 @@ const SavedJobs = () => {
         
                 try {
                     const { data } = await updateJob({
-                        variables: { input: jobToUpdate }
+                        variables: { id: id, input: jobToUpdate }
                     });
           
                     if (error) {
@@ -107,25 +108,26 @@ const SavedJobs = () => {
                                         {job.location}<br />
                                         <Button onClick={() => handleRemoveJob(job.id)}>Remove Job</Button>
                                         {job.applied ? (
-                                            <>
-                                                <Form>
-                                                    <Form.Item>Date Applied
-                                        <Input id="Application_Date" />
-                                                    </Form.Item>
-                                                    <Form.Item>Notes
-                                            <TextArea id="Job_Notes" rows={5} />
-                                                    </Form.Item>
-                                                </Form>
+                                            <p>You have applied for this job. Good luck!</p>
+                                        //     <>
+                                        //         <Form>
+                                        //             <Form.Item>Date Applied
+                                        // <Input id="Application_Date" />
+                                        //             </Form.Item>
+                                        //             <Form.Item>Notes
+                                        //     <TextArea id="Job_Notes" rows={5} />
+                                        //             </Form.Item>
+                                        //         </Form>
                                         
 
-                                                <Button onClick={() => {
-                                                    let app_date = document.getElementById("Application_Date").value
-                                                    let notes = document.getElementById("Job_notes").value
-                                                    // let jobId = job.id;
-                                                    handleUpdateJob(job.id, app_date, notes)
+                                        //         <Button onClick={() => {
+                                        //             let app_date = document.getElementById("Application_Date").value
+                                        //             let notes = document.getElementById("Job_notes").value
+                                        //             // let jobId = job.id;
+                                        //             handleUpdateJob(job.id, app_date, notes)
                                                    
-                                                }}></Button>
-                                                </>
+                                        //         }}>Submit</Button>
+                                        //         </>
                                 ) : (
                                 <Form>
                                                     <Form.Item>I've applied for this job
@@ -140,7 +142,7 @@ const SavedJobs = () => {
                                     </Form.Item>
                                     </Form>
                                
-                                    )};
+                                    )}
                                                                                                             </div>
                             </Card>
 
