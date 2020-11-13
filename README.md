@@ -17,7 +17,7 @@ A MERN stack SPA that allows recent coding boot camp grads to search for availab
 A coding boot camp grad is able to sign up on the app then begin their job hunt with a description of what type of work they're interested in, job location, and if they are looking for a full time position.
 
 ## Deployed Application
-https://rocky-castle-05793.herokuapp.com/
+https://murmuring-everglades-03231.herokuapp.com
 
 ## Installation
 In the project root directory run the following commands:
