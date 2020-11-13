@@ -9,7 +9,7 @@ const typeDefs = gql`
   }
 
   type Jobs {
-    _id: ID!
+    _id: ID
     id: String!
     type: String!
     url: String!
@@ -18,6 +18,7 @@ const typeDefs = gql`
     location: String
     title: String!
     description: String
+    user_id: String
     company_url: String
     company_logo: String
     how_to_apply: String
@@ -27,6 +28,7 @@ const typeDefs = gql`
   }
 
   input jobInput {
+    _id: ID
     id: String!
     type: String!
     url: String!
@@ -51,15 +53,17 @@ const typeDefs = gql`
 
   type Query {
     me: User
+    myJobs(user_id: String): [Jobs]
+    allJobs: [Jobs]
     
   }
 
   type Mutation {
     login(username: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    saveJob(input: jobInput!): User
-    updateJob(input: jobInput!): User
-    removeJob(id: String!): User
+    saveJob(input: jobInput!, user_id: String): Jobs
+    updateJob(_id: ID! applied: Boolean, application_date: String, notes: String): Jobs
+    removeJob(_id: ID!): Jobs
   }
 `;
 

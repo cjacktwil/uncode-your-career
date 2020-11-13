@@ -20,7 +20,12 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    savedJobs: [jobSchema]
+    savedJobs: [
+      {
+      type: Schema.Types.ObjectId,
+      ref: 'Jobs'
+    }
+  ]
   });
 
 // hash user password

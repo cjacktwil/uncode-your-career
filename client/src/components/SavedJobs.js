@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import '../index.css';
 import { UPDATE_JOB, REMOVE_JOB } from '../utils/mutations';
@@ -7,8 +6,8 @@ import { Form, Card, Image, Button, Typography, Row, Col, Input, Checkbox } from
 // import { searchGithubJobs } from '../utils/API';
 import Auth from '../utils/auth';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { GET_ME } from '../utils/queries';
-
+import { GET_ME, MY_JOBS, ALL_JOBS } from '../utils/queries';
+import { removeJobId } from '../utils/localStorage';
 // import { getSavedJobIds } from '../utils/localStorage';
 const { Paragraph, Link } = Typography;
 const { TextArea } = Input;
@@ -19,25 +18,27 @@ const SavedJobs = () => {
     const { loading, data } = useQuery(GET_ME);
     const userData = data?.me || {};
     console.log(userData);
-    
-        const handleUpdateJob = async(id, applied, app_date, notes) => {
-        console.log(id);
-        const jobToUpdate = userData.savedJobs.find((job) => job.id === id);
-        console.log(jobToUpdate);
-        jobToUpdate.applied = applied;
-        // jobToUpdate.application_date = app_date;
-        // jobToUpdate.notes = notes;
-        console.log(jobToUpdate)
-        
-        // const updatedJob = jobToUpdate.
 
-        // let applied = false;
-        // let checked = document.getElementById("applied").checked
-        // if (applied === true) {
-        //     applied = "true"
-        // } else {
-        //     applied = "false"
-        // }
+    const {data: jobInfo } = useQuery(MY_JOBS);
+    const myJobsInfo = jobInfo?.myJobs || [];
+    console.log (myJobsInfo);
+    
+        const handleUpdateJob = async(_id, applied, application_date, notes) => {
+        console.log(application_date);
+        console.log(notes);
+        console.log(applied);
+        const jobToUpdate = myJobsInfo.find((job) => job._id === _id);
+
+        if (applied === true) {
+            jobToUpdate.applied = true;
+        }
+        if (application_date !== "") {
+            jobToUpdate.application_date = application_date
+        }
+        if (notes !== "") {
+            jobToUpdate.notes = notes
+        }
+        console.log(jobToUpdate);
                 //get token
                 const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -49,9 +50,9 @@ const SavedJobs = () => {
         
                 try {
                     const { data } = await updateJob({
-                        variables: { id: id, input: jobToUpdate }
+                        variables: { _id: jobToUpdate._id, applied: jobToUpdate.applied, application_date: jobToUpdate.application_date, notes: jobToUpdate.notes }
                     });
-          
+          console.log(data);
                     if (error) {
                         throw new Error('something went wrong!');
                     }
@@ -66,8 +67,8 @@ const SavedJobs = () => {
     // const savedJobs = userData?.savedJobs || [''];
     // console.log(savedJobs);
 
-    const handleRemoveJob = async(id) => {
-        console.log(id);
+    const handleRemoveJob = async(_id) => {
+        console.log(_id);
 
         const token = Auth.loggedIn() ? Auth.getToken() : null;
         console.log(token);
@@ -77,26 +78,29 @@ const SavedJobs = () => {
         }
 
         try { 
-            const { data } = await removeJob({
-                variables: { id }
+            const { jobInfo } = await removeJob({
+                variables: { _id }
             });
             if (error) {
                 throw new Error('Something went wrong removing this job')
             }
+
+            //remove job's id from local storage
+            removeJobId(_id);
         } catch (err) {
             console.error(err);
         }
 
     }    
+    if (loading) return 'Loading...';
 
       return (
         <>
-        <h3>Saved Jobs</h3>
+            {Auth.loggedIn() && myJobsInfo && myJobsInfo.length ?
+            // userData && userData.savedJobs && userData.savedJobs.length ? 
+                    <div className="saved-jobs-wrapper">
 
-            {Auth.loggedIn() && userData && userData.savedJobs && userData.savedJobs.length ? 
-                    <div className="site-card-wrapper">
-
-                        {userData.savedJobs.map(job => (
+                        {myJobsInfo.map(job => (
                             <>
                                 <Card>
                                     <div key={job.id}>
@@ -106,29 +110,12 @@ const SavedJobs = () => {
                                         {job.type} <br />
                               Company name: <Link href={job.company_url} target="_blank">{job.company}</Link><br />
                                         {job.location}<br />
-                                        <Button onClick={() => handleRemoveJob(job.id)}>Remove Job</Button>
+                                        <Button onClick={() => handleRemoveJob(job._id)}>Remove Job</Button>
                                         {job.applied ? (
-                                            <p>You have applied for this job. Good luck!</p>
-                                        //     <>
-                                        //         <Form>
-                                        //             <Form.Item>Date Applied
-                                        // <Input id="Application_Date" />
-                                        //             </Form.Item>
-                                        //             <Form.Item>Notes
-                                        //     <TextArea id="Job_Notes" rows={5} />
-                                        //             </Form.Item>
-                                        //         </Form>
-                                        
-
-                                        //         <Button onClick={() => {
-                                        //             let app_date = document.getElementById("Application_Date").value
-                                        //             let notes = document.getElementById("Job_notes").value
-                                        //             // let jobId = job.id;
-                                        //             handleUpdateJob(job.id, app_date, notes)
-                                                   
-                                        //         }}>Submit</Button>
-                                        //         </>
-                                ) : (
+                                            
+                                            <p>You applied for this job. Good luck!</p>
+                                        ):(
+                                           
                                 <Form>
                                                     <Form.Item>I've applied for this job
                                                         <Checkbox id="applied" onClick={() => {
@@ -136,14 +123,41 @@ const SavedJobs = () => {
                                     let checked = document.getElementById("applied").checked;
                                     if (checked === true) {
                                         applied = true
-                                    }                                   
-                                    handleUpdateJob(job.id, applied)
+                                    }  
+                                       handleUpdateJob(job._id, applied)
                                 }}/>
                                     </Form.Item>
                                     </Form>
                                
                                     )}
-                                                                                                            </div>
+                                    {job.applied && job.application_date &&
+                                        <p>Applied on: {job.application_date}</p>}
+                                        
+                                    {job.notes && <p>Notes: {job.notes}</p>}
+                                    
+                                    {job.applied && !job.application_date && 
+                                    
+                                    <>
+                                        <Form>
+                                                    <Form.Item>Date Applied:
+                                        <Input id="Application_Date" />
+                                                    </Form.Item>
+                                                    <Form.Item>Notes
+                                            <TextArea id="Job_Notes" rows={5} />
+                                                    </Form.Item>
+                                                </Form>
+                                            <Button onClick={() => {
+                                                    let applied = true;
+                                                    let application_date = document.getElementById("Application_Date").value
+                                                    console.log(application_date);
+                                                    let notes = document.getElementById("Job_Notes").value
+                                                    console.log(notes);
+                                                    handleUpdateJob(job._id, applied, application_date, notes)
+                                                   
+                                                }}>Submit</Button>
+                                        </>
+}
+                                                                                                           </div>
                             </Card>
 
                             </>
@@ -153,7 +167,7 @@ const SavedJobs = () => {
                     };
 
                           </div>
-       : ( <span className="saved-title"> You don't have any saved jobs. Please Log in to save.</span> 
+       : ( <p className="saved-title-description"> You don't have any saved jobs. Please log in to save.</p> 
       )
                 };
          </>  );
@@ -161,3 +175,4 @@ const SavedJobs = () => {
 
 
 export default SavedJobs;
+

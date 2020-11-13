@@ -1,32 +1,30 @@
 
 import ReactHtmlParser from 'react-html-parser';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Button, Input, Form, Checkbox, Typography, Carousel, Image, Row, Col, Divider } from "antd";
 import '../index.css';
 import Auth from '../utils/auth';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { GET_ME } from '../utils/queries';
+import { GET_ME,  } from '../utils/queries';
 import { SAVE_JOB } from '../utils/mutations';
-// import { getSavedJobIds, saveJobIds } from '../utils/localStorage';
+import { getSavedJobIds, saveJobIds } from '../utils/localStorage';
 const { Link } = Typography;
 
 const SearchForm = (props) => {
 
-    //const [text, setArray] = useState({ jobs: [] });
-
     const [descriptionmode, showDescription] = useState(false)
-
-    // const [searchedJobs, setSearchedJobs] = useState({ jobs: [] });
     const [searchedJobs, setSearchedJobs] = useState([]);
-    // const [savedJobIds, setSavedJobIds] = useState(getSavedJobIds());
-    // useEffect(() => {
-    //     return () => saveJobIds(savedJobIds);
-    // });
+    const [savedJobIds, setSavedJobIds] = useState(getSavedJobIds());
     const [saveJob, { error }] = useMutation(SAVE_JOB);
+    useEffect(() => {
+        return () => saveJobIds(savedJobIds);
+    });
+
     const { loading, data } = useQuery(GET_ME);
+    
     const userData = data?.me || {};
-    console.log(userData);
+    // console.log(userData);
 
     const searchJobs = async (description, location, fullTime) => {
 
@@ -46,10 +44,8 @@ const SearchForm = (props) => {
         if (jobs.length === 0) {
             window.alert("no results found, please change search or leave one of the fields empty")
         }
-        // setSearchedJobs({ jobs: respjson })
         setSearchedJobs(jobs);
         console.log(jobs);
-
     };
 
     const handleSaveJob = async (jobId) => {
@@ -66,19 +62,20 @@ const SearchForm = (props) => {
             return false;
         }
 
-        console.log(token);
+        // console.log(token);
 
         try {
             const { data } = await saveJob({
                 variables: { input: jobToSave }
+                
             });
 
             if (error) {
                 throw new Error('something went wrong!');
             }
             //add jobToSave id to saved jobs array
-            // setSavedJobIds([...savedJobIds, jobToSave.id]);
-            // console.log(savedJobIds);
+            setSavedJobIds([...savedJobIds, jobToSave.id]);
+            console.log(savedJobIds);
 
         } catch (error) {
             console.error(error);
@@ -102,21 +99,22 @@ const SearchForm = (props) => {
         padding: '20px',
         height: '250px'
     };
+    if (loading) return 'Loading...';
 
     return (
 
         <>
             <Form className="search-form"
             >
-                <Form.Item id="description" style={{ color: 'white', fontSize: "12px", padding: '10px 0px 0px 12px' }}>
+                <Form.Item id="description" style={{ color: 'white', fontSize: "14px", padding: '10px 0px 0px 12px' }}>
                     Description
     <Input id="Description" />
                 </Form.Item>
-                <Form.Item id="location" style={{ color: 'white', fontSize: "12px", padding: '10px 0px 0px 12px' }}>
+                <Form.Item id="location" style={{ color: 'white', fontSize: "14px", padding: '10px 0px 0px 12px' }}>
                     Location
     <Input id="Location" />
                 </Form.Item>
-                <Form.Item id="full time" style={{ color: 'white', fontSize: "12px", padding: '10px 0px 0px 12px' }}>
+                <Form.Item id="full time" style={{ color: 'white', fontSize: "14px", padding: '10px 0px 0px 12px' }}>
                     Full Time
         <Checkbox id="FullTime" style={{ padding: '10px' }} />
 
@@ -186,7 +184,7 @@ const SearchForm = (props) => {
 
                     : <div id="start"> 
                     <p>Start your job</p>
-                      search now! </div>}
+                      <p>search now! </p></div>}
             </div>
             <div className="mobile-view">
                 {searchedJobs.length ?
