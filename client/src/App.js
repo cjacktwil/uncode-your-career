@@ -16,7 +16,7 @@ const client = new ApolloClient({
       }
     });
   },
-  uri: 'https://murmuring-everglades-03231.herokuapp.com//graphql'
+  uri: 'https://murmuring-everglades-03231.herokuapp.com/graphql'
 });
    
 function App() {
