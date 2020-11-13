@@ -78,7 +78,6 @@ const SearchForm = (props) => {
                 throw new Error('something went wrong!');
             }
             //add jobToSave id to saved jobs 
-            setSavedJobs(jobToSave);
             setSavedJobIds([...savedJobIds, jobToSave.id]);
             console.log(savedJobIds);
 

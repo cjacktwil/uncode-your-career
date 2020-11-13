@@ -61,13 +61,13 @@ const resolvers = {
       if (context.user) {
 
         const newJob = await Jobs.create({...input, user_id: context.user._id});
-        console.log(newJob);
 
-        await User.findByIdAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
           {_id: context.user._id},
           { $push: { savedJobs: newJob._id } },
           { new: true });
-        return newJob;
+        
+          return newJob;
       }
       throw new AuthenticationError('You must log in to save a job.');
     },
