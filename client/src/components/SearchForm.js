@@ -43,7 +43,7 @@ const SearchForm = (props) => {
             searchBody = searchBody + "&full_time=true";
         }
         var res = encodeURI(searchBody)
-        const response = await fetch(`http://localhost:3001/api?${res}`)
+        const response = await fetch(`https://murmuring-everglades-03231.herokuapp.com/api?${res}`)
         let jobs = (await response.json());
         if (jobs.length === 0) {
             window.alert("no results found, please change search or leave one of the fields empty")
