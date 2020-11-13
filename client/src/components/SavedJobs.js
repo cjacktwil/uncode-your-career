@@ -22,8 +22,8 @@ const SavedJobs = () => {
     
         const handleUpdateJob = async(id, applied, app_date, notes) => {
         console.log(id);
-        // const jobToUpdate = userData.savedJobs.find((job) => job.id === jobId);
-        // console.log(jobToUpdate);
+        const jobToUpdate = userData.savedJobs.find((job) => job.id === jobId);
+        console.log(jobToUpdate);
 
         // let applied = false;
         // let checked = document.getElementById("applied").checked
