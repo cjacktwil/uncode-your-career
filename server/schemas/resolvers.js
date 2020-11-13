@@ -30,16 +30,7 @@ const resolvers = {
     allJobs: async () => {
       return Jobs.find().sort({ created_at: -1 })
     },
-    // searchJobs: async (parent, { title, location, type }) => {
-    //   const params = title ? { title } : {} && location ? { location } : {} && type ? { type } : {};
-    //   return Jobs.find(params).sort({ created_at: -1 });
-    // },
-    // savedJobs: async (parent, { saved }) => {
-    //   return Jobs.find(saved).sort({created_at: -1});
-    // },
-    // job: async (parent, { id }) => {
-    //   return Jobs.findOne(id)
-    // }
+
   },
 
   Mutation: {
@@ -92,14 +83,18 @@ const resolvers = {
 removeJob: async (parent, { _id }, context) => {
   if (context.user) {
 
-    const updatedUser = await User.findByIdAndUpdate(
-      {_id: context.user._id},
-      {$pull: {savedJobs: {_id: _id}}},
-      {new: true});
+    // const updatedUser = await User.findByIdAndUpdate(
+    //   {_id: context.user._id},
+    //   {$pull: {savedJobs: {_id: _id}}},
+    //   {new: true});
 
-     const deletedJob = await Jobs.findByIdAndDelete({_id});
-     return deletedJob;
-  
+    const deletedJob = await Jobs.findByIdAndDelete({_id});
+    // const deletedJob = await Jobs.findByIdAndRemove(_id);
+// const updatedJobs = await Jobs.findByIdAndUpdate(_id, {$unset})
+    // const remainingJobs = await Jobs.find({user_id: context.user._id});
+
+    return deletedJob;
+      
   }
   throw new AuthenticationError('You must be logged in to manage your jobs.');
 }

@@ -15,11 +15,15 @@ const SearchForm = (props) => {
 
     const [descriptionmode, showDescription] = useState(false)
     const [searchedJobs, setSearchedJobs] = useState([]);
+    const [savedJobs, setSavedJobs] = useState([]);
     const [savedJobIds, setSavedJobIds] = useState(getSavedJobIds());
     const [saveJob, { error }] = useMutation(SAVE_JOB);
     useEffect(() => {
         return () => saveJobIds(savedJobIds);
     });
+    // useEffect(()=> {
+    //     fetchData();
+    // }, [data]);
 
     const { loading, data } = useQuery(GET_ME);
     
@@ -45,7 +49,7 @@ const SearchForm = (props) => {
             window.alert("no results found, please change search or leave one of the fields empty")
         }
         setSearchedJobs(jobs);
-        console.log(jobs);
+        // console.log(jobs);
     };
 
     const handleSaveJob = async (jobId) => {
@@ -73,7 +77,8 @@ const SearchForm = (props) => {
             if (error) {
                 throw new Error('something went wrong!');
             }
-            //add jobToSave id to saved jobs array
+            //add jobToSave id to saved jobs 
+            setSavedJobs(jobToSave);
             setSavedJobIds([...savedJobIds, jobToSave.id]);
             console.log(savedJobIds);
 

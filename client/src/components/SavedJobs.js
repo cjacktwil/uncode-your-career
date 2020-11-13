@@ -8,6 +8,7 @@ import Auth from '../utils/auth';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { GET_ME, MY_JOBS, ALL_JOBS } from '../utils/queries';
 import { removeJobId } from '../utils/localStorage';
+import { render } from 'react-dom';
 // import { getSavedJobIds } from '../utils/localStorage';
 const { Paragraph, Link } = Typography;
 const { TextArea } = Input;
@@ -80,18 +81,23 @@ const SavedJobs = () => {
         try { 
             const { jobInfo } = await removeJob({
                 variables: { _id }
-            });
+            })
+
             if (error) {
                 throw new Error('Something went wrong removing this job')
             }
 
             //remove job's id from local storage
-            removeJobId(_id);
+            removeJobId(_id)
+
+              
+
         } catch (err) {
             console.error(err);
         }
 
     }    
+
     if (loading) return 'Loading...';
 
       return (
