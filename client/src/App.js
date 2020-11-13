@@ -16,7 +16,7 @@ const client = new ApolloClient({
       }
     });
   },
-  uri: 'http://localhost:3001/graphql'
+  uri: 'https://rocky-castle-05793.herokuapp.com//graphql'
 });
    
 function App() {
