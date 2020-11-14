@@ -21,7 +21,7 @@ const SavedJobs = () => {
     
         const handleUpdateJob = async(id, applied, app_date, notes) => {
         console.log(id);
-        const jobToUpdate = userData.savedJobs.find((job) => job.id === jobId);
+        const jobToUpdate = userData.savedJobs.find((job) => job.id === id);
         console.log(jobToUpdate);
 
         // let applied = false;
@@ -171,7 +171,7 @@ const SavedJobs = () => {
                     };
 
                           </div>
-       : ( <span className="saved-title"> You don't have any saved jobs. Please Log in to save.</span> 
+       : ( <span className="saved-title"> You don't have any saved jobs. Please log in to save.</span> 
       )
                 };
          </>  );

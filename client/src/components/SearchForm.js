@@ -1,5 +1,5 @@
 
-// import ReactHtmlParser from 'react-html-parser';
+import ReactHtmlParser from 'react-html-parser';
 import React, { useState } from 'react';
 
 import { Button, Input, Form, Checkbox, Typography, Carousel, Image, Row, Col, Divider } from "antd";
