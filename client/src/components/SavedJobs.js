@@ -8,8 +8,7 @@ import { Form, Card, Image, Button, Typography, Row, Col, Input, Checkbox } from
 import Auth from '../utils/auth';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { GET_ME } from '../utils/queries';
-
-// import { getSavedJobIds } from '../utils/localStorage';
+import { getSavedJobIds } from '../utils/localStorage';
 const { Paragraph, Link } = Typography;
 const { TextArea } = Input;
 
