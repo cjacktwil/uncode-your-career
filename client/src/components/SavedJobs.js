@@ -57,16 +57,11 @@ const SavedJobs = () => {
                     if (error) {
                         throw new Error('something went wrong!');
                     }
-                    // add jobToSave id to saved jobs array
-                    // setSavedJobIds([...savedJobIds, jobToSave.id]);
-                    // console.log(savedJobIds);
         
                 } catch (error) {
                     console.error(error);
                 }
             };
-    // const savedJobs = userData?.savedJobs || [''];
-    // console.log(savedJobs);
 
     const handleRemoveJob = async(_id) => {
         console.log(_id);

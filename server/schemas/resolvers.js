@@ -1,6 +1,5 @@
 const { AuthenticationError, attachConnectorsToContext } = require('apollo-server-express');
 const { User, Jobs } = require('../models');
-// const jobSchema = require('../models/Jobs');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -83,17 +82,14 @@ const resolvers = {
 removeJob: async (parent, { _id }, context) => {
   if (context.user) {
 
-    // const updatedUser = await User.findByIdAndUpdate(
-    //   {_id: context.user._id},
-    //   {$pull: {savedJobs: {_id: _id}}},
-    //   {new: true});
+    const updatedUser = await User.findByIdAndUpdate(
+      {_id: context.user._id},
+      {$pull: {savedJobs: {_id: _id}}},
+      {new: true});
 
     const deletedJob = await Jobs.findByIdAndDelete({_id});
-    // const deletedJob = await Jobs.findByIdAndRemove(_id);
-// const updatedJobs = await Jobs.findByIdAndUpdate(_id, {$unset})
-    // const remainingJobs = await Jobs.find({user_id: context.user._id});
-
-    return deletedJob;
+    
+    return deletedJobs;
       
   }
   throw new AuthenticationError('You must be logged in to manage your jobs.');
