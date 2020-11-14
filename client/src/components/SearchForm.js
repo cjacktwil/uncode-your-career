@@ -8,7 +8,7 @@ import Auth from '../utils/auth';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { GET_ME } from '../utils/queries';
 import { SAVE_JOB } from '../utils/mutations';
-// import { getSavedJobIds, saveJobIds } from '../utils/localStorage';
+import { getSavedJobIds, saveJobIds } from '../utils/localStorage';
 const { Link } = Typography;
 
 const SearchForm = (props) => {

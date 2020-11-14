@@ -8,8 +8,7 @@ import { Form, Card, Image, Button, Typography, Row, Col, Input, Checkbox } from
 import Auth from '../utils/auth';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { GET_ME } from '../utils/queries';
-
-// import { getSavedJobIds } from '../utils/localStorage';
+import { getSavedJobIds } from '../utils/localStorage';
 const { Paragraph, Link } = Typography;
 const { TextArea } = Input;
 
@@ -22,8 +21,8 @@ const SavedJobs = () => {
     
         const handleUpdateJob = async(id, applied, app_date, notes) => {
         console.log(id);
-        // const jobToUpdate = userData.savedJobs.find((job) => job.id === jobId);
-        // console.log(jobToUpdate);
+        const jobToUpdate = userData.savedJobs.find((job) => job.id === id);
+        console.log(jobToUpdate);
 
         // let applied = false;
         // let checked = document.getElementById("applied").checked
@@ -172,7 +171,7 @@ const SavedJobs = () => {
                     };
 
                           </div>
-       : ( <span className="saved-title"> You don't have any saved jobs. Please Log in to save.</span> 
+       : ( <span className="saved-title"> You don't have any saved jobs. Please log in to save.</span> 
       )
                 };
          </>  );

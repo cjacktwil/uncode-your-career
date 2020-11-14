@@ -52,9 +52,7 @@ const Details = (props) => {
 
     return (
         <Layout>
-            <PageHeader
-
-                className="site-page-header"
+            <PageHeader className="site-page-header"
                 onBack={() => props.history.push('/', {})}
                 title="Uncode Your Career!"
                 extra={
@@ -75,7 +73,7 @@ const Details = (props) => {
                     <div className="saved-title">
                         Saved Jobs
                         </div>
-                    <SavedJobs />
+                        <SavedJobs />
                 </Sider>
                 <Content style={{ margin: '24px 16px 0' }}>
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
@@ -92,7 +90,7 @@ const Details = (props) => {
                         </>
                     </div>
                     <Modal
-                        footer={[
+                          footer={[
                             <Button key="back" onClick={() => setShowModal(false)}>
                                 Cancel
                     </Button>
@@ -113,4 +111,5 @@ const Details = (props) => {
     )
 
 }
+
 export default Details
