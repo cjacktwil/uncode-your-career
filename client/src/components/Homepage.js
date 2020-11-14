@@ -19,11 +19,16 @@ import {
 } from '@stripe/react-stripe-js';
 
 
+
 const { Footer, Sider, Content } = Layout;
+
+
 
 const HomePage = (props) => {
     const stripePromise = loadStripe('pk_test_51HlLBgLzp2GzCQgyaJRYbpxGWjhr5MYLRw8IRrWhrb8nPZpU6HIy0RSig0uK9VNeLHC5T8sR6GpcKUdj6qBM591P00XA71VO5t');
     const [showModal, setShowModal] = useState(false);
+    const [showDonateModal, setShowDonateModal] = useState(false); 
+
 
     return (
 
@@ -45,7 +50,7 @@ const HomePage = (props) => {
                                 ) : (
                                         <Button type="primary" onClick={() => setShowModal(true)}>Login/Signup</Button>
                                     ),
-                                    <Button type="primary" onClick={() => setShowModal(true)}>Donate</Button>
+                                    <Button type="primary" onClick={() => setShowDonateModal(true)}>Donate</Button>
                                 ]}
 
                         />
@@ -81,8 +86,20 @@ const HomePage = (props) => {
                                 onCancel={() => setShowModal(false)}
                                 visible={showModal}
                             >
-                                {/* <LoginForm />
-                                <SignUpForm /> */}
+                                <LoginForm />
+                                <SignUpForm />
+                            </Modal>
+                            <Modal
+                                footer={[
+                                    <Button key="back" onClick={() => setShowDonateModal(false)}>
+                                        Cancel
+                                    </Button>
+                                ]}
+                                title=""
+                                onCancel={() => setShowDonateModal(false)}
+                                visible={showDonateModal}
+                            >
+
                                 <Elements stripe={stripePromise}>
                                 <DonationForm />
                                 </Elements>

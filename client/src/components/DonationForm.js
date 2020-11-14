@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Button, Input, Form } from "antd";
+import StripeCheckout from 'react-stripe-checkout';
 import {
   CardElement,
   Elements,
