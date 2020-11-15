@@ -36,10 +36,10 @@ In the project root directory run the following commands:
 No current testing at the moment.
 
 ## Contributing
-[Tracey Jackson](https://github.com/cjacktwil) (list role in project here)
+[Tracey Jackson](https://github.com/cjacktwil)
 
-[Alex Vasilkov](https://github.com/Alex2055) (list role in project here)
+[Alex Vasilkov](https://github.com/Alex2055)
 
-[Kristin Earnest](https://github.com/kearnest1) (list role in project here)
+[Kristin Earnest](https://github.com/kearnest1)
 
-[Rachel Fritz](https://github.com/rachelf0) (list role in project here)
+[Rachel Fritz](https://github.com/rachelf0)
