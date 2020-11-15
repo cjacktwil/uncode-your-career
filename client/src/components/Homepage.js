@@ -9,12 +9,29 @@ import SearchForm from './SearchForm'
 import "antd/dist/antd.css";
 import '../index.css';
 import SavedJobs from './SavedJobs';
+import { MY_JOBS } from '../utils/queries';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 
 
 const { Footer, Sider, Content } = Layout;
 
 const HomePage = (props) => {
 
+
+
+
+    const {data: Jobs, refetch: refetchjobs } = useQuery(MY_JOBS);
+    const savedJobs = Jobs?.myJobs || [];
+    //setJobJob(savedJobs);
+
+
+
+const handleJobAddition = () => {
+    refetchjobs()
+
+}
+
+    
     const [showModal, setShowModal] = useState(false);
 
     return (
@@ -57,7 +74,9 @@ const HomePage = (props) => {
                                 Saved Jobs
                     </div>
 
-                            <SavedJobs />
+                            <SavedJobs 
+                            
+                            jobs={savedJobs}/>
 
                         </Sider>
                         <Layout>
@@ -78,13 +97,15 @@ const HomePage = (props) => {
                                 </Modal>
 
                                 <div id="searchContainer">
-                                    <SearchForm {...props} />
+                                    <SearchForm 
+                                    onJobChange={handleJobAddition}
+                                    {...props} />
                                 </div>
 
                             </Content>
                             <div className="mobile-view">
                                 Saved Jobs
-                                <SavedJobs />
+                                <SavedJobs jobs={savedJobs} />
                             </div>
                             <Footer style={{ textAlign: 'center', fontSize: '24px' }}> <h6>&copy; 2020</h6> </Footer>
                         </Layout>

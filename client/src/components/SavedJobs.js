@@ -13,22 +13,19 @@ import { render } from 'react-dom';
 const { Paragraph, Link } = Typography;
 const { TextArea } = Input;
 
-const SavedJobs = () => {
+const SavedJobs = (props) => {
     const [updateJob, { error }] = useMutation(UPDATE_JOB);
     const [removeJob, { e }] = useMutation(REMOVE_JOB);
     const { loading, data } = useQuery(GET_ME);
     const userData = data?.me || {};
     console.log(userData);
 
-    const {data: jobInfo } = useQuery(MY_JOBS);
-    const myJobsInfo = jobInfo?.myJobs || [];
-    console.log (myJobsInfo);
     
         const handleUpdateJob = async(_id, applied, application_date, notes) => {
         console.log(application_date);
         console.log(notes);
         console.log(applied);
-        const jobToUpdate = myJobsInfo.find((job) => job._id === _id);
+        const jobToUpdate = props.jobs.find((job) => job._id === _id);
 
         if (applied === true) {
             jobToUpdate.applied = true;
@@ -97,14 +94,13 @@ const SavedJobs = () => {
 
       return (
         <>
-            {Auth.loggedIn() && myJobsInfo && myJobsInfo.length ?
+            {Auth.loggedIn() && props.jobs && props.jobs.length ?
             // userData && userData.savedJobs && userData.savedJobs.length ? 
                     <div className="saved-jobs-wrapper">
 
-                        {myJobsInfo.map(job => (
-                            <>
-                                <Card>
-                                    <div key={job.id}>
+                        {props.jobs.map(job => (
+                                <Card key={job.id}>
+                                    <div>
                                         <Image width={50} src={job.company_logo}
                                         ></Image> <br />
                                         <Link href={job.url} target="_blank">{job.title} </Link><br />
@@ -160,10 +156,6 @@ const SavedJobs = () => {
 }
                                                                                                            </div>
                             </Card>
-
-                            </>
-
-
                         ))
                     };
 
