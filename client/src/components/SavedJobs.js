@@ -3,13 +3,12 @@ import 'antd/dist/antd.css';
 import '../index.css';
 import { UPDATE_JOB, REMOVE_JOB } from '../utils/mutations';
 import { Form, Card, Image, Button, Typography, Row, Col, Input, Checkbox } from 'antd';
-// import { searchGithubJobs } from '../utils/API';
 import Auth from '../utils/auth';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { GET_ME, MY_JOBS, ALL_JOBS } from '../utils/queries';
 import { removeJobId } from '../utils/localStorage';
 import { render } from 'react-dom';
-// import { getSavedJobIds } from '../utils/localStorage';
+
 const { Paragraph, Link } = Typography;
 const { TextArea } = Input;
 
@@ -18,13 +17,14 @@ const SavedJobs = (props) => {
     const [removeJob, { e }] = useMutation(REMOVE_JOB);
     const { loading, data } = useQuery(GET_ME);
     const userData = data?.me || {};
-    console.log(userData);
+//     console.log(userData);
 
     
+
         const handleUpdateJob = async(_id, applied, application_date, notes) => {
-        console.log(application_date);
-        console.log(notes);
-        console.log(applied);
+//         console.log(application_date);
+//         console.log(notes);
+//         console.log(applied);
         const jobToUpdate = props.jobs.find((job) => job._id === _id);
 
         if (applied === true) {
@@ -36,7 +36,8 @@ const SavedJobs = (props) => {
         if (notes !== "") {
             jobToUpdate.notes = notes
         }
-        console.log(jobToUpdate);
+//         console.log(jobToUpdate);
+
                 //get token
                 const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -50,7 +51,7 @@ const SavedJobs = (props) => {
                     const { data } = await updateJob({
                         variables: { _id: jobToUpdate._id, applied: jobToUpdate.applied, application_date: jobToUpdate.application_date, notes: jobToUpdate.notes }
                     });
-          console.log(data);
+//           console.log(data);
                     if (error) {
                         throw new Error('something went wrong!');
                     }
@@ -61,10 +62,10 @@ const SavedJobs = (props) => {
             };
 
     const handleRemoveJob = async(_id) => {
-        console.log(_id);
+//         console.log(_id);
 
         const token = Auth.loggedIn() ? Auth.getToken() : null;
-        console.log(token);
+//         console.log(token);
         
         if(!token) {
             return false;
@@ -80,6 +81,7 @@ const SavedJobs = (props) => {
             }
 
             props.onJobRemoved(_id)
+          
             //remove job's id from local storage
             removeJobId(_id)
 
@@ -162,7 +164,9 @@ const SavedJobs = (props) => {
                     };
 
                           </div>
+
        : ( <p className="saved-title-description"> You don't have any saved jobs. Please log in to save.</p> 
+
       )
                 };
          </>  );
