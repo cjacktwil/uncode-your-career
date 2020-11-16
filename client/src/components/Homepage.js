@@ -26,25 +26,19 @@ import {
 const { Footer, Sider, Content } = Layout;
 
 
-
+const HomePage = (props) => {
 
 
     //const [removeJob, { e }] = useMutation(REMOVE_JOB);
     const {data: Jobs, refetch: refetchjobs } = useQuery(MY_JOBS);
     const savedJobs = Jobs?.myJobs || [];
     
-
-
-
 const handleJobAddition = () => {
     refetchjobs()
 
 }
 
-    
-
-const HomePage = (props) => {
-    const stripePromise = loadStripe('pk_test_51HlLBgLzp2GzCQgyaJRYbpxGWjhr5MYLRw8IRrWhrb8nPZpU6HIy0RSig0uK9VNeLHC5T8sR6GpcKUdj6qBM591P00XA71VO5t');
+   const stripePromise = loadStripe('pk_test_51HlLBgLzp2GzCQgyaJRYbpxGWjhr5MYLRw8IRrWhrb8nPZpU6HIy0RSig0uK9VNeLHC5T8sR6GpcKUdj6qBM591P00XA71VO5t');
 
     const [showModal, setShowModal] = useState(false);
     const [showDonateModal, setShowDonateModal] = useState(false); 
