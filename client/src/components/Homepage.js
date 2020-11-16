@@ -11,6 +11,7 @@ import '../index.css';
 import SavedJobs from './SavedJobs';
 import { MY_JOBS } from '../utils/queries';
 import { useMutation, useQuery } from '@apollo/react-hooks';
+import { UPDATE_JOB, REMOVE_JOB } from '../utils/mutations';
 
 
 const { Footer, Sider, Content } = Layout;
@@ -19,10 +20,10 @@ const HomePage = (props) => {
 
 
 
-
+    //const [removeJob, { e }] = useMutation(REMOVE_JOB);
     const {data: Jobs, refetch: refetchjobs } = useQuery(MY_JOBS);
     const savedJobs = Jobs?.myJobs || [];
-    //setJobJob(savedJobs);
+    
 
 
 
@@ -75,8 +76,9 @@ const handleJobAddition = () => {
                     </div>
 
                             <SavedJobs 
-                            
+                            onJobRemoved={handleJobAddition}
                             jobs={savedJobs}/>
+                            
 
                         </Sider>
                         <Layout>

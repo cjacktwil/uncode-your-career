@@ -79,6 +79,7 @@ const SavedJobs = (props) => {
                 throw new Error('Something went wrong removing this job')
             }
 
+            props.onJobRemoved(_id)
             //remove job's id from local storage
             removeJobId(_id)
 
@@ -99,7 +100,8 @@ const SavedJobs = (props) => {
                     <div className="saved-jobs-wrapper">
 
                         {props.jobs.map(job => (
-                                <Card key={job.id}>
+                                <Card
+                                 key={job.id}>
                                     <div>
                                         <Image width={50} src={job.company_logo}
                                         ></Image> <br />

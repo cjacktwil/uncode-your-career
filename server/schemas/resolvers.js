@@ -89,7 +89,7 @@ removeJob: async (parent, { _id }, context) => {
 
     const deletedJob = await Jobs.findByIdAndDelete({_id});
     
-    return deletedJobs;
+    return deletedJob;
       
   }
   throw new AuthenticationError('You must be logged in to manage your jobs.');
