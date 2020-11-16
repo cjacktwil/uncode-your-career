@@ -1,11 +1,10 @@
-
 import ReactHtmlParser from 'react-html-parser';
 import React, { useState, useEffect } from 'react';
 
 import { Button, Input, Form, Checkbox, Typography, Carousel, Image, Row, Col, Divider } from "antd";
 import '../index.css';
 import Auth from '../utils/auth';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks';
 import { GET_ME,  } from '../utils/queries';
 import { SAVE_JOB } from '../utils/mutations';
 import { getSavedJobIds, saveJobIds } from '../utils/localStorage';
@@ -21,14 +20,13 @@ const SearchForm = (props) => {
     useEffect(() => {
         return () => saveJobIds(savedJobIds);
     });
-    // useEffect(()=> {
-    //     fetchData();
-    // }, [data]);
 
     const { loading, data } = useQuery(GET_ME);
     
     const userData = data?.me || {};
     // console.log(userData);
+
+    const [refreshSavedJobs, {info}] = useLazyQuery(GET_ME);
 
     const searchJobs = async (description, location, fullTime) => {
 
@@ -46,7 +44,7 @@ const SearchForm = (props) => {
         const response = await fetch(`https://murmuring-everglades-03231.herokuapp.com/api?${res}`)
         let jobs = (await response.json());
         if (jobs.length === 0) {
-            window.alert("no results found, please change search or leave one of the fields empty")
+            window.alert("No results found. Please change search terms or leave one of the fields empty")
         }
         setSearchedJobs(jobs);
         // console.log(jobs);
@@ -66,8 +64,6 @@ const SearchForm = (props) => {
             return false;
         }
 
-        // console.log(token);
-
         try {
             const { data } = await saveJob({
                 variables: { input: jobToSave }
@@ -83,8 +79,9 @@ const SearchForm = (props) => {
 
             //add jobToSave id to saved jobs 
             setSavedJobIds([...savedJobIds, jobToSave.id]);
-            console.log(savedJobIds);
+            // console.log(savedJobIds);
 
+            refreshSavedJobs();
         } catch (error) {
             console.error(error);
         }
