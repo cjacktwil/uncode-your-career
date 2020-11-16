@@ -25,7 +25,7 @@ export const getSavedJobIds = () => {
   
     const updatedSavedJobIds = savedJobIds?.filter((savedJobId) => savedJobId !== jobId);
     localStorage.setItem('saved_jobs', JSON.stringify(updatedSavedJobIds));
-  
+console.log(updatedSavedJobIds);
     return true;
   };
   

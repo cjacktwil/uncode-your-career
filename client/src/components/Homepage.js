@@ -9,6 +9,10 @@ import SearchForm from './SearchForm'
 import "antd/dist/antd.css";
 import '../index.css';
 import SavedJobs from './SavedJobs';
+
+import { MY_JOBS } from '../utils/queries';
+import { useMutation, useQuery } from '@apollo/react-hooks';
+import { UPDATE_JOB, REMOVE_JOB } from '../utils/mutations';
 import DonationForm from './DonationForm';
 import { loadStripe } from '@stripe/stripe-js';
 import {
@@ -19,13 +23,29 @@ import {
 } from '@stripe/react-stripe-js';
 
 
-
 const { Footer, Sider, Content } = Layout;
 
 
 
+
+
+    //const [removeJob, { e }] = useMutation(REMOVE_JOB);
+    const {data: Jobs, refetch: refetchjobs } = useQuery(MY_JOBS);
+    const savedJobs = Jobs?.myJobs || [];
+    
+
+
+
+const handleJobAddition = () => {
+    refetchjobs()
+
+}
+
+    
+
 const HomePage = (props) => {
     const stripePromise = loadStripe('pk_test_51HlLBgLzp2GzCQgyaJRYbpxGWjhr5MYLRw8IRrWhrb8nPZpU6HIy0RSig0uK9VNeLHC5T8sR6GpcKUdj6qBM591P00XA71VO5t');
+
     const [showModal, setShowModal] = useState(false);
     const [showDonateModal, setShowDonateModal] = useState(false); 
 
@@ -69,7 +89,10 @@ const HomePage = (props) => {
                                 Saved Jobs
                     </div>
 
-                            <SavedJobs />
+                            <SavedJobs 
+                            onJobRemoved={handleJobAddition}
+                            jobs={savedJobs}/>
+                            
 
                         </Sider>
                         <Layout>
@@ -80,6 +103,7 @@ const HomePage = (props) => {
                                         <Button key="back" onClick={() => setShowModal(false)}>
                                             Cancel
                                     </Button>
+
                                 ]}
                                 title=""
                                 onCancel={() => setShowModal(false)}
@@ -103,7 +127,6 @@ const HomePage = (props) => {
                                 <DonationForm />
                                 </Elements>
                             </Modal>
-
          
 
                             <div id="searchContainer">
@@ -112,7 +135,7 @@ const HomePage = (props) => {
                             </Content>
                             <div className="mobile-view">
                                 Saved Jobs
-                                <SavedJobs />
+                                <SavedJobs jobs={savedJobs} />
                             </div>
                             <Footer style={{ textAlign: 'center', fontSize: '24px' }}> <h6>&copy; 2020</h6> </Footer>
                         </Layout>

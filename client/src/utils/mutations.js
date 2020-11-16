@@ -27,10 +27,6 @@ export const ADD_USER = gql`
 export const SAVE_JOB = gql`
 mutation saveJob($input: jobInput!) {
   saveJob(input: $input) {
-    _id
-    username
-    email
-    savedJobs {
       _id
       id
       type
@@ -46,18 +42,13 @@ mutation saveJob($input: jobInput!) {
       applied
       application_date
       notes
-    }
   }
 }
 `;
 
 export const UPDATE_JOB = gql`
-mutation updateJob($applied: Boolean, $app_date: String, $notes: String ) {
-  updateJob(applied: $applied, application_date: $app_date, notes: $notes) {
-    _id
-    username
-    email
-    savedJobs {  
+mutation updateJob($_id: ID!, $applied: Boolean, $application_date: String, $notes: String ) {
+  updateJob(_id: $_id, applied: $applied, application_date: $application_date, notes: $notes) {
       _id
       id
       type
@@ -67,13 +58,13 @@ mutation updateJob($applied: Boolean, $app_date: String, $notes: String ) {
       location
       title
       description
+      user_id
       company_url
       company_logo
       how_to_apply
       applied
       application_date
       notes
-    }
   }
 }
 `;
@@ -101,12 +92,8 @@ mutation updateJob($applied: Boolean, $app_date: String, $notes: String ) {
 // `;
 
 export const REMOVE_JOB = gql`
-mutation removeJob($id: String!) {
-  removeJob(id: $id) {
-    _id
-    username
-    email
-    savedJobs {
+mutation removeJob($_id: ID!) {
+  removeJob(_id: $_id) {
       _id
       id
       type
@@ -116,13 +103,13 @@ mutation removeJob($id: String!) {
       location
       title
       description
+      user_id
       company_url
       company_logo
       how_to_apply
       applied
       application_date
       notes
-    }
   }
 }
 `;

@@ -18,13 +18,21 @@
 
   .saved-title{
       color: aliceblue;
+      font-size: 18px;
       font-weight: bold;
       text-align: left;
+      padding: 14px;
   }
 
   .saved-title-description{
     color: aliceblue;
-    font-size: 12px;
+    font-size: 14px;
+    padding-left: 14px;
+    text-align: left;
+  }
+
+  #saved-jobs-wrapper{
+    padding: 18px;
   }
 
   #searchContainer{
@@ -51,7 +59,7 @@
   #start {
     text-align: left;
     font-style: italic;
-    font-size: 14px;
+    font-size: 18px;
     color: white;
     padding: 10px;
   }

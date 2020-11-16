@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 // const interviewSchema = require('./Interviews');
 const jobSchema = new Schema(
@@ -8,7 +8,9 @@ const jobSchema = new Schema(
           required: true,
 
         },
-        type: String,
+        type: {
+            type: String
+        },
         url: {
             type: String,
             required: true
@@ -27,11 +29,12 @@ const jobSchema = new Schema(
         },
         how_to_apply: String,
         description: String,
+        user_id: String,
         applied: {
             type: Boolean,
             default: false
         },
-        application_date: Date,
+        application_date: String,
         notes: String
         // interview: [interviewSchema],
         // contacts: [
@@ -48,6 +51,8 @@ const jobSchema = new Schema(
 }
 );
 
-module.exports = jobSchema;
+const Jobs = model('Jobs', jobSchema);
+
+module.exports = Jobs;
 
         //   unique: true  
