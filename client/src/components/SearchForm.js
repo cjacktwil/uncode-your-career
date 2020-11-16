@@ -1,37 +1,19 @@
-
 import ReactHtmlParser from 'react-html-parser';
-import React, { useState, useEffect } from 'react';
-
+import React, { useState } from 'react';
 import { Button, Input, Form, Checkbox, Typography, Carousel, Image, Row, Col, Divider } from "antd";
 import '../index.css';
 import Auth from '../utils/auth';
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { GET_ME,  } from '../utils/queries';
+import { useMutation } from '@apollo/react-hooks';
 import { SAVE_JOB } from '../utils/mutations';
-import { getSavedJobIds, saveJobIds } from '../utils/localStorage';
 const { Link } = Typography;
 
 const SearchForm = (props) => {
 
-    const [descriptionmode, showDescription] = useState(false)
     const [searchedJobs, setSearchedJobs] = useState([]);
-    const [savedJobs, setSavedJobs] = useState([]);
-    const [savedJobIds, setSavedJobIds] = useState(getSavedJobIds());
     const [saveJob, { error }] = useMutation(SAVE_JOB);
-    useEffect(() => {
-        return () => saveJobIds(savedJobIds);
-    });
-    // useEffect(()=> {
-    //     fetchData();
-    // }, [data]);
-
-    const { loading, data } = useQuery(GET_ME);
-    
-    const userData = data?.me || {};
-    // console.log(userData);
 
     const searchJobs = async (description, location, fullTime) => {
-
+        //collect search terms
         let searchBody = "";
         if (description !== "") {
             searchBody = searchBody + "&description=" + description;
@@ -42,55 +24,44 @@ const SearchForm = (props) => {
         if (fullTime) {
             searchBody = searchBody + "&full_time=true";
         }
+        //search API
         var res = encodeURI(searchBody)
         const response = await fetch(`https://murmuring-everglades-03231.herokuapp.com/api?${res}`)
         let jobs = (await response.json());
         if (jobs.length === 0) {
-            window.alert("no results found, please change search or leave one of the fields empty")
+            window.alert("No results found. Please change search terms or leave one of the fields empty")
         }
         setSearchedJobs(jobs);
-        // console.log(jobs);
     };
 
     const handleSaveJob = async (jobId) => {
-        console.log(jobId);
 
         // declare variable to hold selected job information
         const jobToSave = searchedJobs.find((job) => job.id === jobId);
-        console.log(jobToSave);
 
         // get token
         const token = Auth.loggedIn() ? Auth.getToken() : null;
-
         if (!token) {
             return false;
         }
-
-        // console.log(token);
-
+        //call saveJob function on job to save
         try {
             const { data } = await saveJob({
                 variables: { input: jobToSave }
-                
+
             });
 
             if (error) {
                 throw new Error('something went wrong!');
             }
-
+            //refresh saved jobs list
             props.onJobChange(jobToSave);
-           
-
-            //add jobToSave id to saved jobs 
-            setSavedJobIds([...savedJobIds, jobToSave.id]);
-            console.log(savedJobIds);
 
         } catch (error) {
             console.error(error);
         }
     };
-
-
+    //function to open details page
     const showDetails = (job) => {
         props.history.push('/details',
             { job: job }
@@ -107,10 +78,8 @@ const SearchForm = (props) => {
         padding: '20px',
         height: '250px'
     };
-    if (loading) return 'Loading...';
 
     return (
-
         <>
             <Form className="search-form"
             >
@@ -144,15 +113,12 @@ const SearchForm = (props) => {
             <div className="car-container">
                 {searchedJobs.length ?
                     <Carousel className="search-result" autoplay>
-                        {/* {searchedJobs.jobs.slice(0,3).map(job => ( */}
                         {searchedJobs.map(job => (
                             <>
-
                                 <div className="extender">
                                     <Row justify="space-around" align="top">
                                         <Col span={8}>
                                             <div value={60} style={contentStyle} key={job.id}>
-
                                                 <Image width={50} src={job.company_logo}
                                                 ></Image> <br />
                                                 <Link href={job.url} target="_blank">{job.title} </Link><br />
@@ -162,11 +128,8 @@ const SearchForm = (props) => {
                                                 <Button className="savejob-button" onClick={() => handleSaveJob(job.id)}>Save Job</Button>
                                             </div>
                                         </Col>
-
                                         <Col span={16}>
-
                                             <div value={100} style={contentStyleRight} className="shortDesc">
-
                                                 <div className="desc-text"  >
                                                     <div className="description-link">
                                                         <Link className="extender-link"
@@ -180,46 +143,35 @@ const SearchForm = (props) => {
 
                                             </div>
                                         </Col>
-
                                     </Row>
-
                                 </div>
-
                             </>
                         ))}
-
                     </Carousel>
-
-                    : <div id="start"> 
-                    <p>Start your job</p>
-                      <p>search now! </p></div>}
+                    : <div id="start">
+                        <p>Start your job</p>
+                        <p>search now! </p></div>}
             </div>
             <div className="mobile-view">
                 {searchedJobs.length ?
                     <Carousel className="search-result" autoplay>
-                        {/* {searchedJobs.jobs.slice(0,3).map(job => ( */}
                         {searchedJobs.map(job => (
                             <>
-                                        <Image width={50} src={job.company_logo}
-                                        ></Image> <br />
-                                        <Link href="{job.url}" target="_blank">{job.title} </Link><br />
-                                        {job.type} <br />
+                                <Image width={50} src={job.company_logo}
+                                ></Image> <br />
+                                <Link href="{job.url}" target="_blank">{job.title} </Link><br />
+                                {job.type} <br />
                               Company name: <Link href="{job.company_url}" taret="_blank">{job.company}</Link><br />
-                                        {job.location}<br />
-                                        <Button className="savejob-button" onClick={() => handleSaveJob(job.id)}>Save Job</Button><br />
-                                
-                                                <Link className="extender-link"
-                                                    onClick={() => showDetails(job)}
-                                                >
-                                                    Click here to see full description.
+                                {job.location}<br />
+                                <Button className="savejob-button" onClick={() => handleSaveJob(job.id)}>Save Job</Button><br />
+                                <Link className="extender-link"
+                                    onClick={() => showDetails(job)}
+                                >
+                                    Click here to see full description.
                                 </Link>
-                                
-
                             </>
                         ))}
-
                     </Carousel>
-
                     : <div id="start"> Start your job search now! </div>}
             </div>
         </>

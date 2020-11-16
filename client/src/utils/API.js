@@ -27,11 +27,3 @@ export const loginUser = (userData) => {
     body: JSON.stringify(userData),
   });
 };
-
-
-
-
-// export const searchGithubJobs = (params) => {
-//   const url = `https://jobs.github.com/positions.json?`;
-//   return fetch(url + params);
-// };

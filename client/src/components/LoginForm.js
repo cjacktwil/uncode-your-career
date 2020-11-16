@@ -4,32 +4,25 @@ import Auth from '../utils/auth';
 import { useMutation } from '@apollo/react-hooks';
 import { LOGIN_USER } from '../utils/mutations';
 
-
-
 const LoginForm = () => {
   const [login] = useMutation(LOGIN_USER)
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
-  
-
+  //collect data from form
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
-
+  //submit data from form
   const handleFormSubmit = async (event) => {
-    
     try {
       const { data } = await login({
         variables: { ...userFormData },
       });
-
-
-      console.log(data.login.user);
       Auth.login(data.login.token);
     } catch (err) {
       console.error(err);
     }
-
+    //clear form fields after submission
     setUserFormData({
       username: '',
       password: '',
@@ -56,57 +49,49 @@ const LoginForm = () => {
   };
 
   return (
-<>
-Login
-    <Form
-      {...layout}
-      name="basic"
-      initialValues={{
-        remember: true,
-      }}
-      onFinish={handleFormSubmit}
-      onFinishFailed={onFinishFailed}
-
-    >
-
-      <Form.Item
-        onChange={handleInputChange}
-        value={userFormData.username}
-        label="Username"
-
-        rules={[
-          {
-            required: true,
-            message: 'Please input your username!',
-          },
-        ]}
+    <>
+      Login
+      <Form
+        {...layout}
+        name="basic"
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={handleFormSubmit}
+        onFinishFailed={onFinishFailed}
       >
-
-        <Input name="username" />
-      </Form.Item>
-
-      <Form.Item onChange={handleInputChange}
-        value={userFormData.password}
-        label="Password"
-
-        rules={[
-          {
-            required: true,
-            message: 'Please input your password!',
-          },
-        ]}
-      >
-        <Input.Password name="password" />
-      </Form.Item>
-
-      <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Submit
+        <Form.Item
+          onChange={handleInputChange}
+          value={userFormData.username}
+          label="Username"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your username!',
+            },
+          ]}
+        >
+          <Input name="username" />
+        </Form.Item>
+        <Form.Item onChange={handleInputChange}
+          value={userFormData.password}
+          label="Password"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+          <Input.Password name="password" />
+        </Form.Item>
+        <Form.Item {...tailLayout}>
+          <Button type="primary" htmlType="submit">
+            Submit
         </Button>
-      </Form.Item>
-    </Form>
-</>
-
+        </Form.Item>
+      </Form>
+    </>
   );
 };
 
