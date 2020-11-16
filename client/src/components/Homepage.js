@@ -124,7 +124,9 @@ const handleJobAddition = () => {
          
 
                             <div id="searchContainer">
-                                <SearchForm {...props} />
+                                <SearchForm 
+                                onJobChange={handleJobAddition}
+                                {...props} />
                             </div>
                             </Content>
                             <div className="mobile-view">
