@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 
-// const interviewSchema = require('./Interviews');
 const jobSchema = new Schema(
     {
         id: {
@@ -36,23 +35,9 @@ const jobSchema = new Schema(
         },
         application_date: String,
         notes: String
-        // interview: [interviewSchema],
-        // contacts: [
-        //     {
-        //         type: Schema.Types.ObjectId,
-        //         ref: 'Contact'
-        //       }
-        // ],
-        // offer: Boolean,
-        // salary: Number,
-        // benefits: String,
-        // accepted: Boolean
-
 }
 );
 
 const Jobs = model('Jobs', jobSchema);
 
 module.exports = Jobs;
-
-        //   unique: true  

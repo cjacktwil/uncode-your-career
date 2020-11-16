@@ -17,20 +17,14 @@ const SignupForm = () => {
   };
 
   const handleFormSubmit = async () => {
-
     try {
-
       const { data } = await addUser({
         variables: { ...userFormData },
-
       });
-
-      console.log(data.addUser.user);
       Auth.login(data.addUser.token);
     } catch (err) {
       console.error(err);
     }
-
     setUserFormData({
       username: '',
       email: '',
@@ -59,70 +53,60 @@ const SignupForm = () => {
 
   return (
     <>
-Signup
-    <Form
-      {...layout}
-      name="basic"
-      initialValues={{
-        remember: true,
-      }}
-      onFinish={handleFormSubmit}
-      onFinishFailed={onFinishFailed}
-
-    >
-
-      <Form.Item
-        onChange={handleInputChange}
-        value={userFormData.username}
-        label="Username"
-
-        rules={[
-          {
-            required: true,
-            message: 'Please input your username!',
-          },
-        ]}
+      Signup
+      <Form
+        {...layout}
+        name="basic"
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={handleFormSubmit}
+        onFinishFailed={onFinishFailed}
       >
-
-        <Input name="username" />
-      </Form.Item>
-
-      <Form.Item onChange={handleInputChange}
-        value={userFormData.email}
-        label="Email"
-
-        rules={[
-          {
-            required: true,
-            message: 'Please input your username!',
-          },
-        ]}
-      >
-
-        <Input name="email" />
-      </Form.Item>
-
-      <Form.Item onChange={handleInputChange}
-        value={userFormData.password}
-        label="Password"
-
-        rules={[
-          {
-            required: true,
-            message: 'Please input your password!',
-          },
-        ]}
-      >
-        <Input.Password name="password" />
-      </Form.Item>
-
-      <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Submit
+        <Form.Item
+          onChange={handleInputChange}
+          value={userFormData.username}
+          label="Username"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your username!',
+            },
+          ]}
+        >
+          <Input name="username" />
+        </Form.Item>
+        <Form.Item onChange={handleInputChange}
+          value={userFormData.email}
+          label="Email"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your username!',
+            },
+          ]}
+        >
+          <Input name="email" />
+        </Form.Item>
+        <Form.Item onChange={handleInputChange}
+          value={userFormData.password}
+          label="Password"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+          <Input.Password name="password" />
+        </Form.Item>
+        <Form.Item {...tailLayout}>
+          <Button type="primary" htmlType="submit">
+            Submit
         </Button>
-      </Form.Item>
-    </Form>
-</>
+        </Form.Item>
+      </Form>
+    </>
   );
 };
 

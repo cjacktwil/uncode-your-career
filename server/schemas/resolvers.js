@@ -20,10 +20,10 @@ const resolvers = {
 
     myJobs: async (parent, args, context) => {
       if (context.user) {
-        const params = {user_id: context.user._id};
-         return Jobs.find(params);
-          // return mySavedJobs;
-        }
+        const params = { user_id: context.user._id };
+        return Jobs.find(params);
+        // return mySavedJobs;
+      }
       throw new AuthenticationError('Not logged in');
     },
     allJobs: async () => {
@@ -59,41 +59,41 @@ const resolvers = {
     saveJob: async (parent, { input }, context) => {
       if (context.user) {
 
-        const newJob = await Jobs.create({...input, user_id: context.user._id});
+        const newJob = await Jobs.create({ ...input, user_id: context.user._id });
 
         const updatedUser = await User.findByIdAndUpdate(
-          {_id: context.user._id},
+          { _id: context.user._id },
           { $push: { savedJobs: newJob._id } },
           { new: true });
-        
-          return newJob;
+
+        return newJob;
       }
       throw new AuthenticationError('You must log in to save a job.');
     },
 
-    updateJob: async(parent, {_id, applied, application_date, notes}) => {
+    updateJob: async (parent, { _id, applied, application_date, notes }) => {
       const updatedJob = await Jobs.findByIdAndUpdate(
-        {_id: _id},
-        {$set: {applied: applied, application_date: application_date, notes: notes}},
-        {new: true});
-        return updatedJob;
+        { _id: _id },
+        { $set: { applied: applied, application_date: application_date, notes: notes } },
+        { new: true });
+      return updatedJob;
     },
 
-removeJob: async (parent, { _id }, context) => {
-  if (context.user) {
+    removeJob: async (parent, { _id }, context) => {
+      if (context.user) {
 
-    const updatedUser = await User.findByIdAndUpdate(
-      {_id: context.user._id},
-      {$pull: {savedJobs: {_id: _id}}},
-      {new: true});
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedJobs: { _id: _id } } },
+          { new: true });
 
-    const deletedJob = await Jobs.findByIdAndDelete({_id});
-    
-    return deletedJob;
-      
-  }
-  throw new AuthenticationError('You must be logged in to manage your jobs.');
-}
+        const deletedJob = await Jobs.findByIdAndDelete({ _id });
+
+        return deletedJob;
+
+      }
+      throw new AuthenticationError('You must be logged in to manage your jobs.');
+    }
   },
 
 };

@@ -68,13 +68,3 @@ const typeDefs = gql`
 `;
 
 module.exports = typeDefs;
-
-
-
-
-
-    // allJobs: [Jobs]
-    // searchJobs(title: String, location: String, type: String): [Jobs]
-    // job(id: String!): Jobs
-
-    // applied: Boolean, application_date: String, notes: String

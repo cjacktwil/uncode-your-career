@@ -58,19 +58,3 @@ export const ALL_JOBS = gql`
   }
 }
 `;
-
-
-// id
-// type
-// url
-// created_at
-// company
-// location
-// title
-// description
-// company_url
-// company_logo
-// how_to_apply
-// applied
-// application_date
-// notes
