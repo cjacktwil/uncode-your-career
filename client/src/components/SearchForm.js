@@ -1,6 +1,6 @@
 import ReactHtmlParser from 'react-html-parser';
 import React, { useState } from 'react';
-import { Button, Input, Form, Checkbox, Typography, Carousel, Image, Row, Col, Divider } from "antd";
+import { Button, Input, Form, Checkbox, Typography, Carousel, Image, Row, Col} from "antd";
 import '../index.css';
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/react-hooks';
