@@ -1,6 +1,6 @@
 import ReactHtmlParser from 'react-html-parser';
 import React, { useState } from 'react';
-import { Button, Input, Form, Checkbox, Typography, Carousel, Image, Row, Col, Divider } from "antd";
+import { Button, Input, Form, Checkbox, Typography, Carousel, Image, Row, Col} from "antd";
 import '../index.css';
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/react-hooks';
@@ -114,8 +114,8 @@ const SearchForm = (props) => {
                 {searchedJobs.length ?
                     <Carousel className="search-result" autoplay>
                         {searchedJobs.map(job => (
-                            <>
-                                <div className="extender">
+                            
+                                <div key={job.id} className="extender">
                                     <Row justify="space-around" align="top">
                                         <Col span={8}>
                                             <div value={60} style={contentStyle} key={job.id}>
@@ -145,7 +145,6 @@ const SearchForm = (props) => {
                                         </Col>
                                     </Row>
                                 </div>
-                            </>
                         ))}
                     </Carousel>
                     : <div id="start">
@@ -156,7 +155,7 @@ const SearchForm = (props) => {
                 {searchedJobs.length ?
                     <Carousel className="search-result" autoplay>
                         {searchedJobs.map(job => (
-                            <>
+                            <div key={job.id}>
                                 <Image width={50} src={job.company_logo}
                                 ></Image> <br />
                                 <Link href="{job.url}" target="_blank">{job.title} </Link><br />
@@ -169,7 +168,7 @@ const SearchForm = (props) => {
                                 >
                                     Click here to see full description.
                                 </Link>
-                            </>
+                            </div>
                         ))}
                     </Carousel>
                     : <div id="start"> Start your job search now! </div>}

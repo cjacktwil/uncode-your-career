@@ -33,7 +33,6 @@ const HomePage = (props) => {
 
     return (
         <Layout>
-            <>
                 <div className="site-page-header-ghost-wrapper">
                     <PageHeader
                         className="site-page-header"
@@ -51,7 +50,6 @@ const HomePage = (props) => {
                         ]}
                     />
                 </div>
-            </>
             <Layout>
                 <Sider id="sider" style={{
                     overflow: 'auto',
