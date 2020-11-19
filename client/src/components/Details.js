@@ -47,7 +47,7 @@ const Details = (props) => {
             if (error) {
                 throw new Error('something went wrong!');
             }
-
+            refetchjobs()
             
         } catch (error) {
             console.error(error);
@@ -80,7 +80,7 @@ const Details = (props) => {
                                                 jobs={savedJobs}/>
                 </Sider>
                 <Content style={{ margin: '24px 16px 0' }}  
-                onClick={handleJobAddition}
+                
                             {...props}>
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
                         <>
@@ -90,7 +90,7 @@ const Details = (props) => {
                             { savedJobs.map((job) => job.id).indexOf(job.id) !== -1 ? (
                                                     <div>Saved </div>
                                                 ) : (
-                                                <Button className="savejob-button" onClick={() => handleSaveJob(job.id)}>Save Job</Button>
+                                                <Button className="savejob-button" onClick={() => handleSaveJob()}>Save Job</Button>
                                                 )}
                             <Link href={job.url} target="_blank">{job.title}</Link><br />
                             <Link href={job.company_url} target="_blank">{job.company}</Link><br />
