@@ -23,6 +23,8 @@ const Details = (props) => {
     const stripePromise = loadStripe('pk_test_51HlLBgLzp2GzCQgyaJRYbpxGWjhr5MYLRw8IRrWhrb8nPZpU6HIy0RSig0uK9VNeLHC5T8sR6GpcKUdj6qBM591P00XA71VO5t');
     const {data: Jobs, refetch: refetchjobs } = useQuery(MY_JOBS);
     const savedJobs = Jobs?.myJobs || [];
+
+
     const handleJobAddition = () => {
         refetchjobs()
     }
@@ -46,6 +48,7 @@ const Details = (props) => {
                 throw new Error('something went wrong!');
             }
 
+            
         } catch (error) {
             console.error(error);
         }
@@ -84,7 +87,11 @@ const Details = (props) => {
 
                             <Image width={50} src={job.company_logo}
                             ></Image>
-                            <Button className="savejob-button" onClick={() => handleSaveJob()}>Save Job</Button><br />
+                            { savedJobs.map((job) => job.id).indexOf(job.id) !== -1 ? (
+                                                    <div>Saved </div>
+                                                ) : (
+                                                <Button className="savejob-button" onClick={() => handleSaveJob(job.id)}>Save Job</Button>
+                                                )}
                             <Link href={job.url} target="_blank">{job.title}</Link><br />
                             <Link href={job.company_url} target="_blank">{job.company}</Link><br />
                             {job.location}<br />
