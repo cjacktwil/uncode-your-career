@@ -36,6 +36,7 @@ const Details = (props) => {
         // get token
         const token = Auth.loggedIn() ? Auth.getToken() : null;
         if (!token) {
+            window.alert("Please log in to be able to save jobs")
             return false;
         }
         //call saveJob mutation
