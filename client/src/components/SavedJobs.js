@@ -129,7 +129,7 @@ const SavedJobs = (props) => {
                         ))
                     };
                           </div>
-       : ( <p className="saved-title-description"> You don't have any saved jobs. Please log in to save.</p> 
+       : ( <p className="saved-title-description"> You don't have any saved jobs.</p> 
       )
                 };
          </>  );

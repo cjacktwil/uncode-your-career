@@ -96,7 +96,10 @@ const HomePage = (props) => {
                         <div id="searchContainer">
                             <SearchForm
                                 onJobChange={handleJobAddition}
-                                {...props} />
+                                {...props}
+                                savedJobs={savedJobs}
+                                />
+                                
                         </div>
                     </Content>
                     <div className="mobile-view">

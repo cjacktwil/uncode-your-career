@@ -31,7 +31,15 @@ const SearchForm = (props) => {
         if (jobs.length === 0) {
             window.alert("No results found. Please change search terms or leave one of the fields empty")
         }
+
+        
+
+
+
         setSearchedJobs(jobs);
+
+
+
     };
 
     const handleSaveJob = async (jobId) => {
@@ -42,6 +50,7 @@ const SearchForm = (props) => {
         // get token
         const token = Auth.loggedIn() ? Auth.getToken() : null;
         if (!token) {
+            window.alert("Please log in to be able to save jobs")
             return false;
         }
         //call saveJob function on job to save
@@ -64,9 +73,12 @@ const SearchForm = (props) => {
     //function to open details page
     const showDetails = (job) => {
         props.history.push('/details',
-            { job: job }
+            { job: job, 
+            savedJobs: props.savedJobs
+            }
         )
     }
+    
     const contentStyle = {
         lineHeight: '25px',
         padding: '20px',
@@ -125,7 +137,11 @@ const SearchForm = (props) => {
                                                 {job.type} <br />
                               Company name: <Link href={job.company_url} target="_blank">{job.company}</Link><br />
                                                 {job.location}<br />
+                                                { props.savedJobs.map((job) => job.id).indexOf(job.id) !== -1 ? (
+                                                    <div>Saved </div>
+                                                ) : (
                                                 <Button className="savejob-button" onClick={() => handleSaveJob(job.id)}>Save Job</Button>
+                                                )}
                                             </div>
                                         </Col>
                                         <Col span={16}>
@@ -162,7 +178,12 @@ const SearchForm = (props) => {
                                 {job.type} <br />
                               Company name: <Link href="{job.company_url}" taret="_blank">{job.company}</Link><br />
                                 {job.location}<br />
-                                <Button className="savejob-button" onClick={() => handleSaveJob(job.id)}>Save Job</Button><br />
+
+                                { props.savedJobs.map((job) => job.id).indexOf(job.id) !== -1 ? (
+                                                    <div>Saved </div>
+                                                ) : (
+                                                <Button className="savejob-button" onClick={() => handleSaveJob(job.id)}>Save Job</Button>
+                                                )}
                                 <Link className="extender-link"
                                     onClick={() => showDetails(job)}
                                 >
