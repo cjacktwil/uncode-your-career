@@ -29,7 +29,7 @@ const SearchForm = (props) => {
         const response = await fetch(`https://murmuring-everglades-03231.herokuapp.com/api?${res}`)
         let jobs = (await response.json());
         if (jobs.length === 0) {
-            window.alert("No results found. Please change search terms or leave one of the fields empty")
+            window.alert("The GitHub Jobs API is deprecated! New jobs will not be posted from May 19, 2021. It will shut down entirely on August 19, 2021.")
         }
 
         
